@@ -67,6 +67,7 @@ public class CalendarioSportivo {
 	    	
 	    }
 	}
+	
 	public void aggiungiSquadra(Squadra nuova){
 		squadre.add(nuova);
 	}
