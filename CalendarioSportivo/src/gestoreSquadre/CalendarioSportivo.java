@@ -3,6 +3,7 @@ package gestoreSquadre;
 import java.awt.image.BufferedImage;
 import java.util.Vector;
 
+import grafica.FramePrincipale;
 public class CalendarioSportivo {
 
 	//---------Parametri
@@ -13,23 +14,25 @@ public class CalendarioSportivo {
 	//---------Metodi
 	public static void main(String[] args) {
 		
-		new CalendarioSportivo();
-		
+		CalendarioSportivo sessione = new CalendarioSportivo();
+		FramePrincipale f= new FramePrincipale("Calendario Sportivo", sessione);
+		f.setVisible(true);
 	}
 
 	public CalendarioSportivo()
 	{
 		this.calendario = new Vector<Giornata>();
 		this.squadre = new Vector<Squadra>();
-		//TODO Frame e cazzatelle.
-
 	}
 	
 	//Algoritmo di Berger
-	public void generaCalendario()
+	public boolean generaCalendario()
 	{
 		Squadra dummy;
 		int nSquadre = this.squadre.size();
+		
+		if(nSquadre<1) 
+			return false;
 		
 		if(nSquadre%2 != 0) {
 			dummy=new Squadra("Dummy", "Dummy City", dummyLogo);
@@ -66,6 +69,7 @@ public class CalendarioSportivo {
 	    	casa.removeElementAt(1);
 	    	
 	    }
+	    return true;
 	}
 	
 	public void aggiungiSquadra(Squadra nuova){

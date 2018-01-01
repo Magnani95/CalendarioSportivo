@@ -1,17 +1,17 @@
 package gestoreSquadre;
 
-import java.awt.image.BufferedImage;
+import java.awt.*;
 
 public class Squadra {
 
 	//---------Parametri
 	private String 			nome;
 	private String 			citta;
-	private BufferedImage 	logo;
+	private Image 	logo;
 	
 	//---------Inizio metodi
 	
-	public Squadra(String nome, String citta, BufferedImage immagine)
+	public Squadra(String nome, String citta, Image immagine)
 	{
 		this.nome=nome;
 		this.citta=citta;
@@ -31,7 +31,7 @@ public class Squadra {
 	public String getCitta() {
 		return citta;
 	}
-	public BufferedImage getLogo() {
+	public Image getLogo() {
 		return this.logo;
 	}
 }
