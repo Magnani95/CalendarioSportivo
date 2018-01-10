@@ -1,6 +1,5 @@
 package gestoreSquadre;
 
-import java.awt.image.BufferedImage;
 import java.util.Vector;
 
 import grafica.FramePrincipale;
@@ -9,7 +8,6 @@ public class CalendarioSportivo {
 	//---------Parametri
 	private Vector<Giornata> calendario;
 	private Vector<Squadra> squadre;
-	BufferedImage dummyLogo;
 	
 	//---------Metodi
 	public static void main(String[] args) {
@@ -35,7 +33,7 @@ public class CalendarioSportivo {
 			return false;
 		
 		if(nSquadre%2 != 0) {
-			dummy=new Squadra("Dummy", "Dummy City", dummyLogo);
+			dummy=new SquadraDummy();
 			this.aggiungiSquadra(dummy);
 		}
 		
@@ -74,5 +72,13 @@ public class CalendarioSportivo {
 	
 	public void aggiungiSquadra(Squadra nuova){
 		squadre.add(nuova);
+	}
+
+	public Vector<Giornata> getCalendario() {
+		return calendario;
+	}
+
+	public Vector<Squadra> getSquadre() {
+		return squadre;
 	}
 }
