@@ -18,7 +18,7 @@ public class ModelloTabella extends AbstractTableModel {
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 7;
 	}
 
 	@Override

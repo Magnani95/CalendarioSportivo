@@ -13,7 +13,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	private FramePrincipale framePrincipale;
 	
 	private ButtonGroup gruppoAzioni;
-	private JButton aggiungi;
+	private JButton gestione;
 	private JButton genera;
 	private JButton classifica;
 	
@@ -35,11 +35,11 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		// gruppo azioni
 		this.gruppoAzioni= new ButtonGroup();
-		this.aggiungi= new JButton("Aggiungi");
+		this.gestione= new JButton("Gestisci Squadre");
 		this.genera= new JButton("Genera");
 		this.classifica=new JButton("Classifica");
 		
-		this.gruppoAzioni.add(this.aggiungi);
+		this.gruppoAzioni.add(this.gestione);
 		this.gruppoAzioni.add(this.genera);
 		this.gruppoAzioni.add(this.classifica);
 
