@@ -15,7 +15,7 @@ public class SquadraDummy extends Squadra {
 	{
 		
 		Toolkit t= Toolkit.getDefaultToolkit();
-		return t.getImage("/CalendarioSportivo/Media/dummyLogo.png");
+		return t.getImage("/CalendarioSportivo/media/dummyLogo.png");
 		
 	}
 }

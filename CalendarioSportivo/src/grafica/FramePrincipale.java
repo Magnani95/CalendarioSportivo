@@ -43,6 +43,7 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		
 		menuBar.add(file);
 		
+		setMenuBar(menuBar);
 		pannello= new PannelloPrincipale(calendario, this);
 		add(pannello);
 		
