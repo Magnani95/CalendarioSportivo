@@ -7,24 +7,26 @@ import gestoreSquadre.*;
 public class ModelloTabella extends AbstractTableModel {
 	
 	private CalendarioSportivo calendario;
-	private String[] nomeColonne = {"Giornata","Casa","Punti Casa","Punti Ospiti", "Ospiti" };
+	private int nSquadre;
+	private boolean calendarioPronto;
+	
+	private String[] nomeColonne = {"Giornata","logo","Casa","Punti Casa","Punti Ospiti","logo", "Ospiti" };
 	
 	public ModelloTabella(CalendarioSportivo calendario)
 	{
 		this.calendario=calendario;
-		
+		nSquadre= calendario.getSquadre().size();
+		calendarioPronto= false;
 	}
 
-	@Override
+	
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
 		return 7;
 	}
 
-	@Override
+	
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2*nSquadre*(nSquadre - 1);
 	}
 
 	@Override
@@ -33,4 +35,7 @@ public class ModelloTabella extends AbstractTableModel {
 		return null;
 	}
 
+	public void setCalendarioPronto(boolean b) {
+		calendarioPronto=b;
+	}
 }
