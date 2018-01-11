@@ -76,7 +76,6 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		
 		
-		
 	}
 
 	
@@ -88,6 +87,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		case "singolaSquadra":	
 			visioneTabella(e);
 			break;
+		
 		}
 	}
 	
