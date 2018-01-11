@@ -12,7 +12,6 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	private CalendarioSportivo calendario;
 	private FramePrincipale framePrincipale;
 	
-	private ButtonGroup gruppoAzioni;
 	private JButton gestione;
 	private JButton genera;
 	private JButton classifica;
@@ -23,6 +22,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	private JRadioButton singolaSquadra;
 	
 	private JComboBox listaSquadre;
+	private JComboBox listaGiornate;
 	
 	private ModelloTabella modelloTabella;
 	private JTable tabella;
@@ -34,33 +34,48 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		this.framePrincipale = framePrincipale;
 		
 		// gruppo azioni
-		this.gruppoAzioni= new ButtonGroup();
-		this.gestione= new JButton("Gestisci Squadre");
-		this.genera= new JButton("Genera");
-		this.classifica=new JButton("Classifica");
-		
-		this.gruppoAzioni.add(this.gestione);
-		this.gruppoAzioni.add(this.genera);
-		this.gruppoAzioni.add(this.classifica);
+		gestione= new JButton("Gestisci Squadre");
+		genera= new JButton("Genera");
+		classifica=new JButton("Classifica");
+
 
 		//gruppo visualizza
-		this.gruppoVisualizza= new ButtonGroup();
-		this.tutteGiornate= new JRadioButton("Tutte le giornate");
-		this.singolaGiornata= new JRadioButton("Giornata singola");
-		this.singolaSquadra= new JRadioButton("Singola squadra");
+		gruppoVisualizza= new ButtonGroup();
+		tutteGiornate= new JRadioButton("Tutte le giornate");
+		singolaGiornata= new JRadioButton("Giornata singola");
+		singolaSquadra= new JRadioButton("Singola squadra");
 				
 		gruppoVisualizza.add(this.tutteGiornate);
 		gruppoVisualizza.add(this.singolaGiornata);
 		gruppoVisualizza.add(this.singolaSquadra);
 		
-		//singola squadra
-		this.listaSquadre= new JComboBox();
-		this.listaSquadre.setEnabled(false);
-		this.listaSquadre.setEditable(false);
+		//liste
+		listaSquadre= new JComboBox();
+		listaSquadre.setEnabled(false);
+		listaSquadre.setEditable(false);
+		listaGiornate= new JComboBox<>();
+		listaGiornate.setEnabled(false);
+		listaGiornate.setEditable(false);
+		
+		// tabella giornate
+		modelloTabella= new ModelloTabella(calendario);
+		tabella= new JTable(modelloTabella);
+		
+	
+		
+		//aggiunte al panel
+		this.add(gestione);
+		add(genera);
+		add(classifica);
+		
+		add(tutteGiornate);
+		add(singolaGiornata);
+		add(listaGiornate);
+		add(singolaSquadra);
+		add(listaSquadre);
 		
 		
-		this.modelloTabella= new ModelloTabella(calendario);
-		this.tabella= new JTable(modelloTabella);
+		
 		
 	}
 

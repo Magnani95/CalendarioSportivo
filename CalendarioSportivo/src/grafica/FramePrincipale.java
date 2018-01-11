@@ -14,7 +14,7 @@ public class FramePrincipale extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private CalendarioSportivo calendario;
 	
-	private MenuBar menuBar;
+	private MenuBar barra;
 	
 	private Menu file;
 	private MenuItem salva;
@@ -28,26 +28,23 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		super(titolo);
 		this.calendario=calendario;
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		salva= new MenuItem("Salva");
-		carica= new MenuItem("Carica");
-		file = new Menu();
-		menuBar= new MenuBar();
-		
-		salva.addActionListener(this);
-		carica.addActionListener(this);
+		MenuItem salva= new MenuItem("Salva");
+		MenuItem carica= new MenuItem("Carica");
+		Menu file= new Menu("File");
 		
 		file.add(salva);
 		file.add(carica);
+		MenuBar barra= new MenuBar();
+		barra.add(file);
+		this.setMenuBar(barra);
 		
-		menuBar.add(file);
-		
-		setMenuBar(menuBar);
 		pannello= new PannelloPrincipale(calendario, this);
 		add(pannello);
 		
 		pack();
+		//setResizable(false);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 		
 	}
 
