@@ -61,7 +61,6 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		modelloTabella= new ModelloTabella(calendario);
 		tabella= new JTable(modelloTabella);
 		
-	
 		
 		//aggiunte al panel
 		this.add(gestione);
@@ -74,7 +73,8 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		add(singolaSquadra);
 		add(listaSquadre);
 		
-		
+		add(tabella);
+
 		
 	}
 

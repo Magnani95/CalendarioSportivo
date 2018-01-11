@@ -22,7 +22,7 @@ public class ModelloTabella extends AbstractTableModel {
 		nSquadre= calendario.getSquadre().size();
 		calendarioPronto= false;
 		
-		modalita=null;
+		modalita="nessuna";
 		squadraSelezionata=null;
 		giornataSelezionata=-1;
 	}
@@ -45,7 +45,7 @@ public class ModelloTabella extends AbstractTableModel {
 	}
 
 	public Object getValueAt(int arg0, int arg1) {
-		if(modalita==null)
+		if(modalita=="nessuna")
 			return null;
 		return null;
 		
@@ -58,9 +58,9 @@ public class ModelloTabella extends AbstractTableModel {
 	public void aggiornaTabella(String nuova)
 	{
 		switch(nuova) {
-		case "null":
-			modalita=null; break;
-		case "tuttoMOD":
+		case "nessuna":
+			modalita="nessuna"; break;
+		case "tutto":
 			modalita="tutto"; break;
 		default:
 			squadraSelezionata=nuova;
