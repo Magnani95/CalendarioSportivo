@@ -10,6 +10,10 @@ public class ModelloTabella extends AbstractTableModel {
 	private int nSquadre;
 	private boolean calendarioPronto;
 	
+	private String modalita;
+	private String squadraSelezionata;
+	private int giornataSelezionata;
+	
 	private String[] nomeColonne = {"Giornata","logo","Casa","Punti Casa","Punti Ospiti","logo", "Ospiti" };
 	
 	public ModelloTabella(CalendarioSportivo calendario)
@@ -17,6 +21,10 @@ public class ModelloTabella extends AbstractTableModel {
 		this.calendario=calendario;
 		nSquadre= calendario.getSquadre().size();
 		calendarioPronto= false;
+		
+		modalita=null;
+		squadraSelezionata=null;
+		giornataSelezionata=-1;
 	}
 
 	
@@ -25,17 +33,49 @@ public class ModelloTabella extends AbstractTableModel {
 	}
 
 	
-	public int getRowCount() {
-		return 2*nSquadre*(nSquadre - 1);
+	public int getRowCount()
+	{ 
+		switch(modalita) {
+		case "tutto": return (2*nSquadre*(nSquadre - 1));
+		case "giornata": return (calendario.getSquadre().size()/2);
+		case "squadra": return (2*calendario.getCalendario().size());
+		default: return 1;
+		}
+		
 	}
 
-	@Override
 	public Object getValueAt(int arg0, int arg1) {
-		// TODO Auto-generated method stub
+		if(modalita==null)
+			return null;
 		return null;
+		
 	}
 
 	public void setCalendarioPronto(boolean b) {
 		calendarioPronto=b;
 	}
+	
+	public void aggiornaTabella(String nuova)
+	{
+		switch(nuova) {
+		case "null":
+			modalita=null; break;
+		case "tuttoMOD":
+			modalita="tutto"; break;
+		default:
+			squadraSelezionata=nuova;
+			modalita="squadra";
+		}
+	}
+	
+	public void aggiornaTabella(int nGiornata)
+	{
+		if (nGiornata <= 0 || nGiornata >= calendario.getCalendario().size()*2) {
+			System.err.println("Errore in aggiornaTabella giornata");
+			System.exit(-2);
+		}
+		giornataSelezionata=nGiornata;
+		modalita="giornata";
+	}
+	
 }

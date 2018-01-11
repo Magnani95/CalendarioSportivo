@@ -80,8 +80,39 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	}
 
 	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent e) 
+	{
+		switch(e.getActionCommand()) {
+		case "tutteGiornate":
+		case "singolaGiornata":
+		case "singolaSquadra":	
+			visioneTabella(e);
+			break;
+		}
 	}
+	
+	private void visioneTabella(ActionEvent e)
+	{
+		switch(e.getActionCommand()) {
+		case "tutteGiornate":
+			listaGiornate.setEnabled(false);
+			listaSquadre.setEnabled(false);
+			modelloTabella.aggiornaTabella("tuttoMOD");
+			break;
+		case "singolaGiornata":
+			listaGiornate.setEnabled(true);
+			listaSquadre.setEnabled(false);
+			modelloTabella.aggiornaTabella(null);
+			break;
+		case "singolaSquadra":
+			listaGiornate.setEnabled(false);
+			listaSquadre.setEnabled(true);
+			modelloTabella.aggiornaTabella(null);
+			break;
+		}
+	}
+	
 }
+	
+	
+

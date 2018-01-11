@@ -49,8 +49,15 @@ public class FramePrincipale extends JFrame implements ActionListener{
 	}
 
 	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) 
+	{
+		switch(e.getActionCommand()) {
+			case "salva":
+		
+			case "carica":
+				
+			default: System.err.println("Errore FramePrincipale->actionPermed"); System.exit(-1);
+		}
 		
 	}
 	
