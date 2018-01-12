@@ -135,7 +135,8 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		return;
 				
 		case "Classifica":
-			
+		case "Salva":
+		case "Carica":
 			
 			break;
 		
