@@ -1,15 +1,17 @@
 package gestoreSquadre;
 
+import java.util.Iterator;
 import java.util.Vector;
 public class Giornata {
 
 	//--------Parametri
-	Vector<Incontro> giornata;
+	private Vector<Incontro> giornata;
 	
 	//--------Metodi
 	
 	public Giornata() {
 		this.giornata = new Vector<Incontro>(); 
+	
 	}
 	
 	public Incontro getIncontro(int numIncontro){
@@ -20,4 +22,8 @@ public class Giornata {
 		giornata.add(incontro);
 	}
 
+	public Iterator<Incontro> getIterator() {
+		return giornata.iterator();
+	}
 }
+

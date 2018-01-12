@@ -41,10 +41,19 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 
 		//gruppo visualizza
 		gruppoVisualizza= new ButtonGroup();
+		
 		tutteGiornate= new JRadioButton("Tutte le giornate");
+		tutteGiornate.setActionCommand("tutteGiornate");
+		tutteGiornate.addActionListener(this);
+		
 		singolaGiornata= new JRadioButton("Giornata singola");
+		singolaGiornata.setActionCommand("singolaGiornata");
+		singolaGiornata.addActionListener(this);
+		
 		singolaSquadra= new JRadioButton("Singola squadra");
-				
+		singolaSquadra.setActionCommand("singolaSquadra");
+		singolaSquadra.addActionListener(this);		
+		
 		gruppoVisualizza.add(this.tutteGiornate);
 		gruppoVisualizza.add(this.singolaGiornata);
 		gruppoVisualizza.add(this.singolaSquadra);
@@ -81,6 +90,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) 
 	{
+		System.out.println("Evento Raccolto!");
 		switch(e.getActionCommand()) {
 		case "tutteGiornate":
 		case "singolaGiornata":
@@ -97,17 +107,18 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		case "tutteGiornate":
 			listaGiornate.setEnabled(false);
 			listaSquadre.setEnabled(false);
-			modelloTabella.aggiornaTabella("tuttoMOD");
+			modelloTabella.aggiornaTabella("tutto");
 			break;
 		case "singolaGiornata":
 			listaGiornate.setEnabled(true);
 			listaSquadre.setEnabled(false);
-			modelloTabella.aggiornaTabella(null);
+			modelloTabella.aggiornaTabella("giornata");
 			break;
 		case "singolaSquadra":
+			System.out.println("punto RAggiunto!");
 			listaGiornate.setEnabled(false);
 			listaSquadre.setEnabled(true);
-			modelloTabella.aggiornaTabella(null);
+			modelloTabella.aggiornaTabella("squadra");
 			break;
 		}
 	}
