@@ -35,9 +35,13 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		// gruppo azioni
 		gestione= new JButton("Gestisci Squadre");
-		genera= new JButton("Genera");
+		gestione.addActionListener(this);
+		
+		genera= new JButton("Genera Calendario");
+		genera.addActionListener(this);
+		
 		classifica=new JButton("Classifica");
-
+		classifica.addActionListener(this);
 
 		//gruppo visualizza
 		gruppoVisualizza= new ButtonGroup();
@@ -62,9 +66,12 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		listaSquadre= new JComboBox();
 		listaSquadre.setEnabled(false);
 		listaSquadre.setEditable(false);
+		listaSquadre.addActionListener(this);
+		
 		listaGiornate= new JComboBox<>();
 		listaGiornate.setEnabled(false);
 		listaGiornate.setEditable(false);
+		listaGiornate.addActionListener(this);
 		
 		// tabella giornate
 		modelloTabella= new ModelloTabella(calendario);
@@ -90,12 +97,46 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) 
 	{
-		System.out.println("Evento Raccolto!");
+		System.err.println("Raccolto evento:\t" + e.getActionCommand());
 		switch(e.getActionCommand()) {
 		case "tutteGiornate":
 		case "singolaGiornata":
 		case "singolaSquadra":	
 			visioneTabella(e);
+			return;
+			
+		case "Gestisci Squadre":
+			
+		case "Genera Calendario":
+			
+			if(calendario.getCalendario().size() != 0) {
+				int n = JOptionPane.showConfirmDialog(
+					    framePrincipale,
+					    "Calendario presente. Vuoi continuare?",
+					    "Attenzione",
+					    JOptionPane.YES_NO_OPTION);
+						
+			}else {
+				if(calendario.generaCalendario() == true) {
+					JOptionPane.showMessageDialog(framePrincipale,
+						    "Generazione calendario avvenuta con successo",
+						    "Calendario generato",
+						    JOptionPane.PLAIN_MESSAGE);
+					modelloTabella.setCalendarioPronto(true);
+					return;
+				}else {
+					JOptionPane.showMessageDialog(framePrincipale,
+						    "Impossibile generare calendario. Controlla di aver inserito almeno una squadra",
+						    "Errore",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+					
+			}
+		return;
+				
+		case "Classifica":
+			
+			
 			break;
 		
 		}
@@ -115,7 +156,6 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			modelloTabella.aggiornaTabella("giornata");
 			break;
 		case "singolaSquadra":
-			System.out.println("punto RAggiunto!");
 			listaGiornate.setEnabled(false);
 			listaSquadre.setEnabled(true);
 			modelloTabella.aggiornaTabella("squadra");

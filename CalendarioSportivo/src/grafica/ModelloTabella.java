@@ -18,7 +18,7 @@ public class ModelloTabella extends AbstractTableModel {
 	private String squadraSelezionata;
 	private int giornataSelezionata;
 	
-	private String[] nomeColonne = {"Giornata","Logo Ospiti","Casa","Punti Casa","Punti Ospiti","Ospiti", "Logo Ospiti" };
+	private String[] nomeColonne = {"Giornata","Logo Casa","Casa","Punti Casa","Punti Ospiti","Ospiti", "Logo Ospiti" };
 	
 	public ModelloTabella(CalendarioSportivo calendario)
 	{
@@ -39,6 +39,9 @@ public class ModelloTabella extends AbstractTableModel {
 	
 	public int getRowCount()
 	{ 
+		if(calendarioPronto == false)
+			return 1;
+		
 		switch(modalita) {
 		case "tutto": 
 			return (nSquadre*(nSquadre - 1)) 			>0?	(nSquadre*(nSquadre - 1)) : 1 ;
@@ -54,6 +57,8 @@ public class ModelloTabella extends AbstractTableModel {
 
 	public Object getValueAt(int riga, int colonna) 
 	{
+		if(riga !=0 &&calendarioPronto== false)
+			return null;
 		
 		if(riga==0) {
 			return nomeColonne[colonna];
