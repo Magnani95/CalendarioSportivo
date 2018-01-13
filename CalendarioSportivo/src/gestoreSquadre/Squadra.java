@@ -5,9 +5,9 @@ import java.awt.*;
 public class Squadra {
 
 	//---------Parametri
-	private String 			nome;
+	private String 	nome;
 	private String 			citta;
-	private Image 	logo;
+	private Image 			logo;
 	
 	//---------Inizio metodi
 	

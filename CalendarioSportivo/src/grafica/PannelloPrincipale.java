@@ -12,7 +12,6 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	private CalendarioSportivo calendario;
 	private FramePrincipale framePrincipale;
 	
-	private JButton gestione;
 	private JButton genera;
 	private JButton classifica;
 	
@@ -34,8 +33,6 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		this.framePrincipale = framePrincipale;
 		
 		// gruppo azioni
-		gestione= new JButton("Gestisci Squadre");
-		gestione.addActionListener(this);
 		
 		genera= new JButton("Genera Calendario");
 		genera.addActionListener(this);
@@ -79,7 +76,6 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		
 		//aggiunte al panel
-		this.add(gestione);
 		add(genera);
 		add(classifica);
 		
@@ -104,8 +100,6 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		case "singolaSquadra":	
 			visioneTabella(e);
 			return;
-			
-		case "Gestisci Squadre":
 			
 		case "Genera Calendario":
 			

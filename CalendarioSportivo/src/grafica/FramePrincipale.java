@@ -20,6 +20,11 @@ public class FramePrincipale extends JFrame implements ActionListener{
 	private MenuItem salva;
 	private MenuItem carica;
 	
+	private Menu gestisciSquadre;
+	private MenuItem aggiungi;
+	private MenuItem modifica;
+	private MenuItem elimina;
+	
 	private PannelloPrincipale pannello;
 	
 	//---------Metodi
@@ -29,13 +34,29 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		this.calendario=calendario;
 		
 		MenuItem salva= new MenuItem("Salva");
+		salva.addActionListener(this);
 		MenuItem carica= new MenuItem("Carica");
+		carica.addActionListener(this);
 		Menu file= new Menu("File");
+		
+		MenuItem aggiungi= new MenuItem("Aggiungi");
+		aggiungi.addActionListener(this);
+		MenuItem modifica= new MenuItem("Modifica");
+		modifica.addActionListener(this);
+		MenuItem elimina= new MenuItem("Elimina");
+		elimina.addActionListener(this);
+		Menu gestisciSquadre= new Menu("Gestisci Squadre");
 		
 		file.add(salva);
 		file.add(carica);
+		
+		gestisciSquadre.add(aggiungi);
+		gestisciSquadre.add(modifica);
+		gestisciSquadre.add(elimina);
+		
 		MenuBar barra= new MenuBar();
 		barra.add(file);
+		barra.add(gestisciSquadre);
 		this.setMenuBar(barra);
 		
 		pannello= new PannelloPrincipale(calendario, this);
@@ -51,12 +72,31 @@ public class FramePrincipale extends JFrame implements ActionListener{
 	
 	public void actionPerformed(ActionEvent e) 
 	{
-		switch(e.getActionCommand()) {
-			case "salva":
+		System.err.println(e.getActionCommand());
 		
-			case "carica":
+		JFrame f=new JFrame("Calendario Sportivino");
+		f.addWindowListener(new FrameAscoltatore(f, this));
+		f.setResizable(false);
+		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		
+		
+		switch(e.getActionCommand()) {
+			case "Salva":
+		
+			case "Carica":
 				
-			default: System.err.println("Errore FramePrincipale->actionPermed"); System.exit(-1);
+			case "Aggiungi":
+				f.add(new PannelloAggiungi(f, calendario, this));
+				f.pack();
+				f.setVisible(true);
+				this.setEnabled(false);
+				
+			case "Modifica":
+				
+			case "Elimina":
+				break;
+			default: System.err.println("Errore FramePrincipale->actionPerformed"); System.exit(-1);
 		}
 		
 	}
