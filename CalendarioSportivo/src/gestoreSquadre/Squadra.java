@@ -1,25 +1,29 @@
 package gestoreSquadre;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
 
 public class Squadra {
 
 	//---------Parametri
 	private String 	nome;
-	private String 			citta;
-	private Image 			logo;
+	private String 	citta;
+	private ImageIcon logo;
 	
 	//---------Inizio metodi
 	
-	public Squadra(String nome, String citta, Image immagine)
+	public Squadra(String nome, String citta, BufferedImage immagine)
 	{
 		this.nome=nome;
 		this.citta=citta;
-		this.logo=immagine;
+		this.logo= new ImageIcon(immagine);
 	}
 	
 	public Squadra(String nome, String citta)
 	{
+		System.err.println("Generazione Squadra "+nome+" - "+citta);
 		this.nome=nome;
 		this.citta=citta;
 		this.logo=null;
@@ -31,7 +35,7 @@ public class Squadra {
 	public String getCitta() {
 		return citta;
 	}
-	public Image getLogo() {
+	public ImageIcon getLogo() {
 		return this.logo;
 	}
 }

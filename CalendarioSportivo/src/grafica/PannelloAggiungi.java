@@ -2,7 +2,10 @@ package grafica;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import gestoreSquadre.*;
 
@@ -70,7 +73,8 @@ public class PannelloAggiungi extends JPanel implements ActionListener{
 			break;
 			
 		case "Conferma":
-		
+			System.err.println("Inizio ciclo Conferma");
+			
 			stNome=nome.getText();
 				if (stNome.isEmpty()) {
 					JOptionPane.showMessageDialog(fContenitore,
@@ -79,6 +83,8 @@ public class PannelloAggiungi extends JPanel implements ActionListener{
 					    JOptionPane.WARNING_MESSAGE);
 					return;
 				}
+				
+				System.err.println("Inizio controllo citta");
 			stCitta=citta.getText();
 				if(stCitta.isEmpty()) {
 					JOptionPane.showMessageDialog(fContenitore,
@@ -88,10 +94,35 @@ public class PannelloAggiungi extends JPanel implements ActionListener{
 					return;
 				}
 				
-			//caricaImmagine(path);
+			path=pathLogo.getText();
+				
+			if(path.isEmpty()) {
+				System.err.println("Generazione Squadra senza logo");
+				calendario.aggiungiSquadra(new Squadra(stNome, stCitta));
+			}else {
+				calendario.aggiungiSquadra(new Squadra (stNome, stCitta, caricaImmagine(path)) );
+			}
 			
 			return;
+			
 		default: System.err.println("Errore PannelloAggiungi"); return;
 		}
 	}
+	
+	private BufferedImage caricaImmagine(String percorso)
+	{
+		BufferedImage img=null; 
+		try{
+			img = ImageIO.read(new File(percorso));
+		
+		}catch(IOException e) {
+			JOptionPane.showMessageDialog(fContenitore,
+				    "Verrà caricato un logo standard.",
+				    "Errore Caricamento",
+				    JOptionPane.WARNING_MESSAGE);
+		}
+		
+		return img;
+	}
+	
 }

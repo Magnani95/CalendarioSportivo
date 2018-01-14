@@ -39,20 +39,37 @@ public class ModelloTabella extends AbstractTableModel {
 	
 	public int getRowCount()
 	{ 
+		//System.err.println("Check num righe:\t"+ String.valueOf(calendarioPronto));
+		nSquadre= calendario.getNSquadreCalendario();
+		
 		if(calendarioPronto == false)
 			return 1;
-		
+			
+		int nRighe;
+		//System.err.println("Check modalità:\t"+ modalita);
 		switch(modalita) {
+		
 		case "tutto": 
-			return (nSquadre*(nSquadre - 1)) 			>0?	(nSquadre*(nSquadre - 1)) : 1 ;
+			nRighe= (nSquadre*(nSquadre - 1)) 	>0?	(nSquadre*(nSquadre - 1))+1 : 1;
+			break;
+		
 		case "giornata":
-			return (calendario.getSquadre().size()/2) 	>0?	(calendario.getSquadre().size()/2) : 1;
+			nRighe= (nSquadre/2) 	>0?	(nSquadre/2)+1 : 1;
+			break;
+		
 		case "squadra": 
-			return (2*calendario.getCalendario().size())>0?	(2*calendario.getCalendario().size()) : 1;
+			nRighe= (calendario.getCalendario().size())>0?	(calendario.getCalendario().size())+1 : 1;
+			break;
 		
 		default: return 1;
 		}
-		
+		//System.err.println("nRighe:\t"+ String.valueOf(nRighe));
+		return nRighe;
+	}
+	
+	public Class getColumnClass(int colonna)
+	{
+		return getValueAt(0, colonna).getClass();
 	}
 
 	public Object getValueAt(int riga, int colonna) 
@@ -61,6 +78,8 @@ public class ModelloTabella extends AbstractTableModel {
 			return null;
 		
 		if(riga==0) {
+			if(colonna==1 || colonna == 6)
+				return calendario.getLogo();
 			return nomeColonne[colonna];
 		}
 		
@@ -77,12 +96,18 @@ public class ModelloTabella extends AbstractTableModel {
 	
 	private Object casoTutto(int riga, int colonna)
 	{
-		int nSquadre = calendario.getSquadre().size();
-		//int totGiornate = calendario.getCalendario().size();
-		//int totIncontri = nSquadre*(nSquadre-1);
+		//System.err.println("casoTutto:\t"+String.valueOf(riga)+"-"+String.valueOf(colonna));
 		
-		int nGiornata = riga/(nSquadre/2);
-		int nIncontro = riga%(nSquadre/2);
+		int nSquadre = calendario.getNSquadreCalendario();
+		int totGiornate = calendario.getCalendario().size();
+		int totIncontri = nSquadre*(nSquadre-1);
+		
+		int nGiornata = (riga-1)/(nSquadre/2) ;
+		//System.err.println("nGiornata:\t"+String.valueOf(nGiornata));
+		
+		int nIncontro = (riga-1)%(nSquadre/2);
+		//System.err.println("nIncontro:\t"+String.valueOf(nIncontro));
+		System.err.println("Coordinate\t"+riga+"-"+colonna);
 		
 		switch(colonna) {
 		case 0:	// num giornata
@@ -173,20 +198,13 @@ public class ModelloTabella extends AbstractTableModel {
 		calendarioPronto=b;
 	}
 	
-	public void aggiornaTabella(String nuova)
+	public void aggiornaSquadra(String nuova)
 	{
-		switch(nuova) {
-		case "nessuna":
-			modalita="nessuna"; break;
-		case "tutto":
-			modalita="tutto"; break;
-		default:
-			squadraSelezionata=nuova;
-			modalita="squadra";
-		}
+		squadraSelezionata=nuova;
+		modalita="squadra";
 	}
 	
-	public void aggiornaTabella(int nGiornata)
+	public void aggiornaGiornata(int nGiornata)
 	{
 		if (nGiornata <= 0 || nGiornata >= calendario.getCalendario().size()*2) {
 			System.err.println("Errore in aggiornaTabella giornata");
@@ -195,5 +213,10 @@ public class ModelloTabella extends AbstractTableModel {
 		giornataSelezionata=nGiornata;
 		modalita="giornata";
 	}
+	
+	public void aggiornaTutto() {
+		modalita="tutto";
+	}
+	
 	
 }

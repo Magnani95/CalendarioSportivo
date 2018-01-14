@@ -73,7 +73,12 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		// tabella giornate
 		modelloTabella= new ModelloTabella(calendario);
 		tabella= new JTable(modelloTabella);
-		
+		tabella.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		tabella.getColumnModel().getColumn(0).setPreferredWidth(60);
+		tabella.getColumnModel().getColumn(2).setPreferredWidth(120);
+		tabella.getColumnModel().getColumn(5).setPreferredWidth(120);
+
+
 		
 		//aggiunte al panel
 		add(genera);
@@ -93,6 +98,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) 
 	{
+		
 		System.err.println("Raccolto evento:\t" + e.getActionCommand());
 		switch(e.getActionCommand()) {
 		case "tutteGiornate":
@@ -126,8 +132,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 				}
 					
 			}
-		return;
-				
+			break;	
 		case "Classifica":
 		case "Salva":
 		case "Carica":
@@ -135,25 +140,27 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			break;
 		
 		}
+		
 	}
 	
 	private void visioneTabella(ActionEvent e)
 	{
+		System.err.println("Inizio visioneTabella");
 		switch(e.getActionCommand()) {
 		case "tutteGiornate":
 			listaGiornate.setEnabled(false);
 			listaSquadre.setEnabled(false);
-			modelloTabella.aggiornaTabella("tutto");
+			modelloTabella.aggiornaTutto();
 			break;
 		case "singolaGiornata":
 			listaGiornate.setEnabled(true);
 			listaSquadre.setEnabled(false);
-			modelloTabella.aggiornaTabella("giornata");
+			modelloTabella.aggiornaGiornata(1);
 			break;
 		case "singolaSquadra":
 			listaGiornate.setEnabled(false);
 			listaSquadre.setEnabled(true);
-			modelloTabella.aggiornaTabella("squadra");
+			modelloTabella.aggiornaSquadra("TODO");
 			break;
 		}
 	}
