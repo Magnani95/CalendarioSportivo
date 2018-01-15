@@ -23,7 +23,6 @@ public class FramePrincipale extends JFrame implements ActionListener{
 	private Menu gestisciSquadre;
 	private MenuItem aggiungi;
 	private MenuItem modifica;
-	private MenuItem elimina;
 	
 	private PannelloPrincipale pannello;
 	
@@ -43,8 +42,7 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		aggiungi.addActionListener(this);
 		MenuItem modifica= new MenuItem("Modifica");
 		modifica.addActionListener(this);
-		MenuItem elimina= new MenuItem("Elimina");
-		elimina.addActionListener(this);
+	
 		Menu gestisciSquadre= new Menu("Gestisci Squadre");
 		
 		file.add(salva);
@@ -52,7 +50,6 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		
 		gestisciSquadre.add(aggiungi);
 		gestisciSquadre.add(modifica);
-		gestisciSquadre.add(elimina);
 		
 		MenuBar barra= new MenuBar();
 		barra.add(file);
@@ -63,7 +60,6 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		add(pannello);
 		
 		pack();
-		//setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		
@@ -91,10 +87,13 @@ public class FramePrincipale extends JFrame implements ActionListener{
 				f.pack();
 				f.setVisible(true);
 				this.setEnabled(false);
-				
+				break;
 			case "Modifica":
+				f.add(new PannelloModifica(f, calendario, this));
+				f.pack();
+				f.setVisible(true);
+				this.setEnabled(false);
 				
-			case "Elimina":
 				break;
 			default: System.err.println("Errore FramePrincipale->actionPerformed"); System.exit(-1);
 		}

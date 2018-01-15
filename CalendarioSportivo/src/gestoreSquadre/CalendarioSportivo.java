@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import grafica.FramePrincipale;
+import grafica.ModelloTabella;
 public class CalendarioSportivo {
 
 	//---------Parametri
@@ -18,6 +19,7 @@ public class CalendarioSportivo {
 	private ImageIcon logoStandard;
 	
 	private int nSquadreCalendario;
+	private ModelloTabella modelloTabella;
 	
 	//---------Metodi
 	public static void main(String[] args) {
@@ -86,6 +88,7 @@ public class CalendarioSportivo {
 	    }
 	    System.err.println("nIncontri\t"+String.valueOf(calendario.size()));
 	    generaRitorno();
+	    modelloTabella.setCalendarioPronto(true);
 	    return true;
 	}
 	
@@ -121,6 +124,32 @@ public class CalendarioSportivo {
 			System.err.println("Errore caricamento logo Standard");
 		}
 		this.logoStandard= new ImageIcon(img);
+	}
+	
+	public Vector<String> getNomiSquadre()
+	{
+		Vector<String> nomiSquadre= new Vector<String>();
+		
+		if(squadre.size() == 0) 
+			return nomiSquadre;
+		
+		Iterator<Squadra> it =squadre.iterator();
+		Squadra attuale;
+		
+		while(it.hasNext() )
+			nomiSquadre.add( it.next().getNome() );
+		return nomiSquadre;
+	}
+	
+	public void eliminaCalendario()
+	{
+		calendario.clear();
+		nSquadreCalendario=0;
+		modelloTabella.setCalendarioPronto(false);
+	}
+	
+	public void setModelloTabella(ModelloTabella m) {
+		this.modelloTabella=m;
 	}
 	
 	public void aggiungiSquadra(Squadra nuova){

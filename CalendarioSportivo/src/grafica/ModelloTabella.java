@@ -23,7 +23,7 @@ public class ModelloTabella extends AbstractTableModel {
 	public ModelloTabella(CalendarioSportivo calendario)
 	{
 		this.calendario=calendario;
-		nSquadre= calendario.getSquadre().size();
+		nSquadre= calendario.getNSquadreCalendario();
 		calendarioPronto= false;
 		
 		modalita="nessuna";

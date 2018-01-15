@@ -38,4 +38,13 @@ public class Squadra {
 	public ImageIcon getLogo() {
 		return this.logo;
 	}
+	public void setNome(String s) {
+		nome=s;
+	}
+	public void setCitta(String s) {
+		citta=s;
+	}
+	public void setLogo(ImageIcon img) {
+		logo = img;
+	}
 }

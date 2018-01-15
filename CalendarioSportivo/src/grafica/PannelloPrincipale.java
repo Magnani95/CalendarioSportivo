@@ -77,7 +77,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		tabella.getColumnModel().getColumn(0).setPreferredWidth(60);
 		tabella.getColumnModel().getColumn(2).setPreferredWidth(120);
 		tabella.getColumnModel().getColumn(5).setPreferredWidth(120);
-
+		calendario.setModelloTabella(modelloTabella);
 
 		
 		//aggiunte al panel
@@ -101,37 +101,45 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		System.err.println("Raccolto evento:\t" + e.getActionCommand());
 		switch(e.getActionCommand()) {
+		
 		case "tutteGiornate":
 		case "singolaGiornata":
 		case "singolaSquadra":	
 			visioneTabella(e);
-			return;
+								return;
 			
 		case "Genera Calendario":
 			
+			
 			if(calendario.getCalendario().size() != 0) {
 				int n = JOptionPane.showConfirmDialog(
-					    framePrincipale,
-					    "Calendario presente. Vuoi continuare?",
-					    "Attenzione",
-					    JOptionPane.YES_NO_OPTION);
-						
+							framePrincipale,
+							"Calendario presente. Vuoi continuare?",
+							"Attenzione",
+							JOptionPane.YES_NO_OPTION);
+			 	
+			 	if (n == JOptionPane.NO_OPTION || n == JOptionPane.CLOSED_OPTION)
+			 		return;
+			 	else
+			 		calendario.getCalendario().clear();
+			}
+			 
+			 
+			if(calendario.generaCalendario() == true) {
+				JOptionPane.showMessageDialog(framePrincipale,
+					    "Generazione calendario avvenuta con successo",
+					    "Calendario generato",
+					    JOptionPane.PLAIN_MESSAGE);
+				//modelloTabella.setCalendarioPronto(true);
+				return;
 			}else {
-				if(calendario.generaCalendario() == true) {
-					JOptionPane.showMessageDialog(framePrincipale,
-						    "Generazione calendario avvenuta con successo",
-						    "Calendario generato",
-						    JOptionPane.PLAIN_MESSAGE);
-					modelloTabella.setCalendarioPronto(true);
-					return;
-				}else {
-					JOptionPane.showMessageDialog(framePrincipale,
-						    "Impossibile generare calendario. Controlla di aver inserito almeno una squadra",
-						    "Errore",
-						    JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(framePrincipale,
+					    "Impossibile generare calendario. Controlla di aver inserito almeno una squadra",
+					    "Errore",
+					    JOptionPane.ERROR_MESSAGE);
 				}
 					
-			}
+			
 			break;	
 		case "Classifica":
 		case "Salva":

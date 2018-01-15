@@ -76,22 +76,22 @@ public class PannelloAggiungi extends JPanel implements ActionListener{
 			System.err.println("Inizio ciclo Conferma");
 			
 			stNome=nome.getText();
-				if (stNome.isEmpty()) {
-					JOptionPane.showMessageDialog(fContenitore,
-					    "Il nome non può essere vuoto",
-					    "Errore",
-					    JOptionPane.WARNING_MESSAGE);
+			if (stNome.isEmpty()) {
+				JOptionPane.showMessageDialog(fContenitore,
+				    "Il nome non può essere vuoto",
+				    "Errore",
+				    JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				
-				System.err.println("Inizio controllo citta");
+			System.err.println("Inizio controllo citta");
 			stCitta=citta.getText();
-				if(stCitta.isEmpty()) {
-					JOptionPane.showMessageDialog(fContenitore,
-						    "La città non può essere vuota",
-						    "Errore",
-						    JOptionPane.WARNING_MESSAGE);
-					return;
+			if(stCitta.isEmpty()) {
+				JOptionPane.showMessageDialog(fContenitore,
+				    "La città non può essere vuota",
+				    "Errore",
+				    JOptionPane.WARNING_MESSAGE);
+				return;
 				}
 				
 			path=pathLogo.getText();
@@ -102,6 +102,11 @@ public class PannelloAggiungi extends JPanel implements ActionListener{
 			}else {
 				calendario.aggiungiSquadra(new Squadra (stNome, stCitta, caricaImmagine(path)) );
 			}
+			
+			JOptionPane.showMessageDialog(fContenitore,
+				    "Squadra aggiunta con successo",
+				    "Evvai",
+				    JOptionPane.PLAIN_MESSAGE);
 			
 			return;
 			
