@@ -2,6 +2,8 @@ package grafica;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Iterator;
+import java.util.Vector;
 
 import javax.swing.*;
 import gestoreSquadre.*;
@@ -11,6 +13,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private CalendarioSportivo calendario;
 	private FramePrincipale framePrincipale;
+	private Vector<String> nomiSquadre;
 	
 	private JButton genera;
 	private JButton classifica;
@@ -61,11 +64,13 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		//liste
 		listaSquadre= new JComboBox();
+		listaSquadre.setActionCommand("selSquadra");
 		listaSquadre.setEnabled(false);
 		listaSquadre.setEditable(false);
 		listaSquadre.addActionListener(this);
 		
-		listaGiornate= new JComboBox<>();
+		listaGiornate= new JComboBox();
+		listaGiornate.setActionCommand("selGiornata");
 		listaGiornate.setEnabled(false);
 		listaGiornate.setEditable(false);
 		listaGiornate.addActionListener(this);
@@ -106,10 +111,14 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		case "singolaGiornata":
 		case "singolaSquadra":	
 			visioneTabella(e);
-								return;
+								break;
 			
 		case "Genera Calendario":
 			
+			gruppoVisualizza.clearSelection();
+			listaGiornate.setEnabled(false);
+			listaSquadre.setEnabled(false);
+			modelloTabella.reset();
 			
 			if(calendario.getCalendario().size() != 0) {
 				int n = JOptionPane.showConfirmDialog(
@@ -141,6 +150,16 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 					
 			
 			break;	
+		
+		case "selSquadra": 
+			int n= listaSquadre.getSelectedIndex();
+			modelloTabella.aggiornaSquadra(nomiSquadre.get(n<0? 0:n));
+			
+			break;
+		case "selGiornata":
+			int m =listaGiornate.getSelectedIndex();
+			System.err.println("Idx\t"+m);
+			modelloTabella.aggiornaGiornata(m<0? 0:m);
 		case "Classifica":
 		case "Salva":
 		case "Carica":
@@ -149,6 +168,8 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		}
 		
+		framePrincipale.repaint();
+		framePrincipale.pack();
 	}
 	
 	private void visioneTabella(ActionEvent e)
@@ -160,16 +181,46 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			listaSquadre.setEnabled(false);
 			modelloTabella.aggiornaTutto();
 			break;
+			
 		case "singolaGiornata":
 			listaGiornate.setEnabled(true);
 			listaSquadre.setEnabled(false);
-			modelloTabella.aggiornaGiornata(1);
+			
+			listaGiornate.removeAllItems();
+			if(calendario.getCalendario().size() == 0)
+				return;
+			
+			for(int i=0; i!=calendario.getCalendario().size(); i++)
+				listaGiornate.addItem(i+1);
+			
+			modelloTabella.aggiornaGiornata(0);
 			break;
+			
 		case "singolaSquadra":
 			listaGiornate.setEnabled(false);
 			listaSquadre.setEnabled(true);
-			modelloTabella.aggiornaSquadra("TODO");
+			
+			listaSquadre.removeAllItems();
+			nomiSquadre=calendario.getNomiSquadre();
+			
+			if(calendario.getNSquadreCalendario() == 0)
+				return;
+			
+			
+			//rimuovo le squadre aggiunte dopo la generazione del calendario.
+			for(int i=calendario.getNSquadreCalendario(); i!=calendario.getSquadre().size(); i++ ) {
+				nomiSquadre.remove(calendario.getNSquadreCalendario());
+			}
+			Iterator<String> it = nomiSquadre.iterator();
+			
+			while(it.hasNext()) {
+				listaSquadre.addItem(it.next());
+			}
+			
+			modelloTabella.aggiornaSquadra(nomiSquadre.get(0));
 			break;
+			
+			default: System.err.println("Errore in VisioneTabella");
 		}
 	}
 	

@@ -20,6 +20,7 @@ public class ModelloTabella extends AbstractTableModel {
 	
 	private String[] nomeColonne = {"Giornata","Logo Casa","Casa","Punti Casa","Punti Ospiti","Ospiti", "Logo Ospiti" };
 	
+	
 	public ModelloTabella(CalendarioSportivo calendario)
 	{
 		this.calendario=calendario;
@@ -28,7 +29,7 @@ public class ModelloTabella extends AbstractTableModel {
 		
 		modalita="nessuna";
 		squadraSelezionata=null;
-		giornataSelezionata=-1;
+		giornataSelezionata=0;
 	}
 
 	
@@ -135,17 +136,17 @@ public class ModelloTabella extends AbstractTableModel {
 		case 0: 
 			return giornataSelezionata+1;
 		case 1:
-			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga).getCasa().getLogo();
+			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga-1).getCasa().getLogo();
 		case 2:
-			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga).getCasa().getNome();
+			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga-1).getCasa().getNome();
 		case 3:
-			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga).getPunteggioCasa();
+			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga-1).getPunteggioCasa();
 		case 4:
-			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga).getPunteggioOspite();
+			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga-1).getPunteggioOspite();
 		case 5:
-			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga).getOspite().getNome();
+			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga-1).getOspite().getNome();
 		case 6:
-			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga).getOspite().getLogo();
+			return calendario.getCalendario().get(giornataSelezionata).getIncontro(riga-1).getOspite().getLogo();
 		
 		default: return "!!ERRORE 01 !! ";
 		}
@@ -153,11 +154,14 @@ public class ModelloTabella extends AbstractTableModel {
 
 	private Object casoSquadra(int riga, int colonna)
 	{
-		Incontro attuale = trovaIncontro(squadraSelezionata, riga-1);
+		//System.err.println("casoSquadra\t"+riga+"-"+colonna);
+		if(colonna == 0)
+			return riga;
+		
+		Incontro attuale = trovaIncontro(riga-1);
 		
 		switch(colonna) {
-		case 0: 
-			return giornataSelezionata+1;
+	 
 		case 1:
 			return attuale.getCasa().getLogo();
 		case 2:
@@ -176,12 +180,13 @@ public class ModelloTabella extends AbstractTableModel {
 		
 	}
 	
-	private Incontro trovaIncontro(String squadra, int nGiornata)
+	private Incontro trovaIncontro(int nGiornata)
 	{
 		Giornata gAttuale = calendario.getCalendario().get(nGiornata);
 		Iterator<Incontro> it = gAttuale.getIterator();
 		
-		for(Incontro iAttuale= it.next(); it.hasNext(); iAttuale=it.next() ) {
+		while(it.hasNext()) {
+			Incontro iAttuale = it.next();
 			if(iAttuale.getCasa().getNome() == squadraSelezionata 
 				|| iAttuale.getOspite().getNome() == squadraSelezionata) {
 				return iAttuale;
@@ -206,7 +211,8 @@ public class ModelloTabella extends AbstractTableModel {
 	
 	public void aggiornaGiornata(int nGiornata)
 	{
-		if (nGiornata <= 0 || nGiornata >= calendario.getCalendario().size()*2) {
+		System.err.println("nGiornata\t"+nGiornata);
+		if (nGiornata < 0 || nGiornata >= calendario.getCalendario().size()) {
 			System.err.println("Errore in aggiornaTabella giornata");
 			System.exit(-2);
 		}
@@ -216,6 +222,9 @@ public class ModelloTabella extends AbstractTableModel {
 	
 	public void aggiornaTutto() {
 		modalita="tutto";
+	}
+	public void reset() {
+		modalita="nessuna";
 	}
 	
 	
