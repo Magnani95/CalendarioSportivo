@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 
 /**
  * Classe che implementa un ascoltatore di un <code>JFrame</code>. In particolare, e'
- * utilizzato per gestire l'uscita da una finestra secondaria (es. aggiunta,
- * modifica, filtro data) mediante la chiusura del frame e non l'utilizzo dei
+ * utilizzato per gestire l'uscita da una finestra secondaria (aggiunta,
+ * modifica) mediante la chiusura del frame e non l'utilizzo dei
  * bottoni, che altrimenti lascierebbe il frame disabilitato e il programma
  * inutilizzabile.
  * 
