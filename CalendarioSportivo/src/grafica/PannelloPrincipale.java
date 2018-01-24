@@ -83,7 +83,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		tabella.getColumnModel().getColumn(2).setPreferredWidth(120);
 		tabella.getColumnModel().getColumn(5).setPreferredWidth(120);
 		calendario.setModelloTabella(modelloTabella);
-
+		tabella.getSelectionModel().addListSelectionListener(modelloTabella);;
 		
 		//aggiunte al panel
 		add(genera);

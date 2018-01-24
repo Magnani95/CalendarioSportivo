@@ -4,11 +4,13 @@ import gestoreSquadre.*;
 
 import java.util.Iterator;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 
 
-public class ModelloTabella extends AbstractTableModel {
+public class ModelloTabella extends AbstractTableModel implements ListSelectionListener {
 	
 	private CalendarioSportivo calendario;
 	private int nSquadre;
@@ -108,7 +110,7 @@ public class ModelloTabella extends AbstractTableModel {
 		
 		int nIncontro = (riga-1)%(nSquadre/2);
 		//System.err.println("nIncontro:\t"+String.valueOf(nIncontro));
-		System.err.println("Coordinate\t"+riga+"-"+colonna);
+		//System.err.println("Coordinate\t"+riga+"-"+colonna);
 		
 		switch(colonna) {
 		case 0:	// num giornata
@@ -225,6 +227,13 @@ public class ModelloTabella extends AbstractTableModel {
 	}
 	public void reset() {
 		modalita="nessuna";
+	}
+
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
