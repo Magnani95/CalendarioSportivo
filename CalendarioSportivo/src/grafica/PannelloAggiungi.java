@@ -78,7 +78,7 @@ public class PannelloAggiungi extends JPanel implements ActionListener{
 			stNome=nome.getText();
 			if (stNome.isEmpty()) {
 				JOptionPane.showMessageDialog(fContenitore,
-				    "Il nome non può essere vuoto",
+				    "Il nome non puo' essere vuoto",
 				    "Errore",
 				    JOptionPane.WARNING_MESSAGE);
 					return;

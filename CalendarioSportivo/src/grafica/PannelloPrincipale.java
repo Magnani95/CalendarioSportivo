@@ -17,6 +17,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	
 	private JButton genera;
 	private JButton classifica;
+	private JButton risultati;
 	
 	private ButtonGroup gruppoVisualizza;
 	private JRadioButton tutteGiornate;
@@ -42,6 +43,9 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		classifica=new JButton("Classifica");
 		classifica.addActionListener(this);
+		
+		risultati= new JButton("Imposta Risultati");
+		risultati.addActionListener(this);
 
 		//gruppo visualizza
 		gruppoVisualizza= new ButtonGroup();
@@ -88,6 +92,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		//aggiunte al panel
 		add(genera);
 		add(classifica);
+		add(risultati);
 		
 		add(tutteGiornate);
 		add(singolaGiornata);
@@ -111,7 +116,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		case "singolaGiornata":
 		case "singolaSquadra":	
 			visioneTabella(e);
-								break;
+			break;
 			
 		case "Genera Calendario":
 			
@@ -160,6 +165,31 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			int m =listaGiornate.getSelectedIndex();
 			System.err.println("Idx\t"+m);
 			modelloTabella.aggiornaGiornata(m<0? 0:m);
+			
+			break;
+			
+		case "Imposta Risultati":
+			
+			if(calendario.getCalendario().isEmpty()) {
+				JOptionPane.showMessageDialog(framePrincipale,
+					    "Nessun calendario generato",
+					    "Errore",
+					    JOptionPane.WARNING_MESSAGE);
+						return;
+			}
+				
+			JFrame f=new JFrame("Modifica Risultati");
+			f.addWindowListener(new FrameAscoltatore(f, framePrincipale));
+			f.setResizable(false);
+			f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			f.add(new pannelloRisultati(f, calendario, framePrincipale));
+			f.pack();
+			f.setVisible(true);
+			this.setEnabled(false);
+			
+			break;
+			
 		case "Classifica":
 		case "Salva":
 		case "Carica":
@@ -220,7 +250,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			modelloTabella.aggiornaSquadra(nomiSquadre.get(0));
 			break;
 			
-			default: System.err.println("Errore in VisioneTabella");
+		default: System.err.println("Errore in VisioneTabella");
 		}
 	}
 	

@@ -214,6 +214,10 @@ public class ModelloTabella extends AbstractTableModel implements ListSelectionL
 	public void aggiornaGiornata(int nGiornata)
 	{
 		System.err.println("nGiornata\t"+nGiornata);
+		
+		if(calendarioPronto==false)
+			return;
+		
 		if (nGiornata < 0 || nGiornata >= calendario.getCalendario().size()) {
 			System.err.println("Errore in aggiornaTabella giornata");
 			System.exit(-2);
