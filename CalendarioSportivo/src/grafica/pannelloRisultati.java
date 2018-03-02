@@ -31,6 +31,7 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 	private JSpinner spinnerOspiti;
 	
 	private JButton salva;
+	private JButton nonGiocata;
 	
 	
 	public pannelloRisultati(JFrame f, CalendarioSportivo c, FramePrincipale fPrincipale)
@@ -53,6 +54,10 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 		spinnerOspiti= new JSpinner(new SpinnerNumberModel(0, 0, 999, 1));
 
 		salva= new JButton("Salva");
+		salva.addActionListener(this);
+		
+		nonGiocata= new JButton("Non Giocata");
+		nonGiocata.addActionListener(this);
 		
 		//parte di selezione
 		//!!!DA LASCIARE PER ULTIMA ALTRIMENTI VA IN nullPointerException!!!
@@ -64,9 +69,6 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 
 		listaGiornate.addActionListener(this);
 		listaIncontri.addActionListener(this);
-		
-		//listaIncontri.setSelectedItem(1);
-		//listaGiornate.setSelectedItem(1);
 		
 		listaGiornate.setActionCommand("Modifica");
 		listaIncontri.setActionCommand("Modifica");
@@ -92,6 +94,7 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 		add(spinnerOspiti);
 		
 		add(salva);
+		add(nonGiocata);
 	}
 	
 	
@@ -102,13 +105,45 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 		switch(e.getActionCommand()) {
 		
 		case "Salva":
-		
+			Incontro attuale= recuperaIncontro();
+			
+			try {
+				spinnerCasa.commitEdit();
+				spinnerOspiti.commitEdit();
+			}catch(java.text.ParseException ex) {
+				JOptionPane.showMessageDialog(framePrincipale,
+					    "Impossibile recuperare il valore impostato",
+					    "Errore",
+					    JOptionPane.ERROR_MESSAGE);
+				return;
+				}
+			attuale.setRisultato( (int) spinnerCasa.getValue(), (int) spinnerOspiti.getValue());
+			
+			JOptionPane.showMessageDialog(framePrincipale,
+				    "Risultato aggiornato con successo",
+				    "Successo",
+				    JOptionPane.PLAIN_MESSAGE);
+			
 			break;
 		case "Modifica":
 			aggiornaValori();
 			
 			break;
-		default:// aggiornaValori(); break;
+			
+		case "Non Giocata":
+			Incontro selezionato = recuperaIncontro();
+			selezionato.setNonGiocata();
+			
+			JOptionPane.showMessageDialog(framePrincipale,
+				    "Partita impostata come Non Giocata",
+				    "Successo",
+				    JOptionPane.PLAIN_MESSAGE);
+			
+			aggiornaValori();
+			
+			break;
+			
+		default: break;
 		
 		}
 		
@@ -116,14 +151,7 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 	
 	private void aggiornaValori()
 	{
-		int nGiornata= listaGiornate.getSelectedIndex();
-		int nIncontro= listaIncontri.getSelectedIndex();
-		
-		nGiornata= nGiornata<0? 0:nGiornata;
-		nIncontro= nIncontro<0? 0:nIncontro;
-		System.err.println("aggiornaValori:\t"+ nGiornata +"-"+ nIncontro);
-		
-		Incontro selezionato= calendario.getCalendario().get(nGiornata).getIncontro(nIncontro);
+		Incontro selezionato= recuperaIncontro();
 		squadraCasa.setText(selezionato.getCasa().getNome());
 		squadraOspite.setText(selezionato.getOspite().getNome());
 		
@@ -131,6 +159,18 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 		spinnerOspiti.setValue(selezionato.getPunteggioOspite());
 		
 		
+	}
+	private Incontro recuperaIncontro()
+	{
+		int nGiornata= listaGiornate.getSelectedIndex();
+		int nIncontro= listaIncontri.getSelectedIndex();
+		
+		nGiornata= nGiornata<0? 0:nGiornata;
+		nIncontro= nIncontro<0? 0:nIncontro;
+		
+		Incontro attuale= calendario.getCalendario().get(nGiornata).getIncontro(nIncontro);
+		
+		return attuale;
 	}
 
 }

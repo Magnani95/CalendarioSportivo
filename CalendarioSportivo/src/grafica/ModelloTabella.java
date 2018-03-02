@@ -226,17 +226,18 @@ public class ModelloTabella extends AbstractTableModel implements ListSelectionL
 		modalita="giornata";
 	}
 	
-	public void aggiornaTutto() {
+	public void aggiornaTutto()
+	{	
 		modalita="tutto";
 	}
+	
 	public void reset() {
 		modalita="nessuna";
 	}
 
 
-	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	

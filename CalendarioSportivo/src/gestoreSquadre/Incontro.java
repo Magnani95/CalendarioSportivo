@@ -36,6 +36,13 @@ public class Incontro {
 		else //Pareggio
 			this.risultato=Risultato.pareggio;	
 	}
+	
+	public void setNonGiocata()
+	{
+		this.risultato= Risultato.nonGiocata;
+		this.punteggioCasa=0;
+		this.punteggioOspite=0;
+	}
 
 	public Squadra getCasa() {
 		return casa;
@@ -56,6 +63,6 @@ public class Incontro {
 	public Risultato getRisultato() {
 		return risultato;
 	}
-	
+
 	
 }

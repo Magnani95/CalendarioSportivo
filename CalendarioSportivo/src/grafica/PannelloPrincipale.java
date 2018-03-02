@@ -35,19 +35,22 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		super();
 		this.calendario=calendario;
 		this.framePrincipale = framePrincipale;
+		setLayout(new BorderLayout(5, 5) );
 		
 		// gruppo azioni
-		
+		JPanel panAzioni= new JPanel();
 		genera= new JButton("Genera Calendario");
 		genera.addActionListener(this);
-		
+	
 		classifica=new JButton("Classifica");
 		classifica.addActionListener(this);
 		
 		risultati= new JButton("Imposta Risultati");
 		risultati.addActionListener(this);
-
+		
 		//gruppo visualizza
+		JPanel panVisualizza = new JPanel();
+		
 		gruppoVisualizza= new ButtonGroup();
 		
 		tutteGiornate= new JRadioButton("Tutte le giornate");
@@ -90,17 +93,19 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		tabella.getSelectionModel().addListSelectionListener(modelloTabella);;
 		
 		//aggiunte al panel
-		add(genera);
-		add(classifica);
-		add(risultati);
 		
-		add(tutteGiornate);
-		add(singolaGiornata);
-		add(listaGiornate);
-		add(singolaSquadra);
-		add(listaSquadre);
+		panAzioni.add(genera);
+		panAzioni.add(classifica);
+		panAzioni.add(risultati);
+		add(panAzioni, BorderLayout.NORTH);
 		
-		add(tabella);
+		panVisualizza.add(tutteGiornate);
+		panVisualizza.add(singolaGiornata);
+		panVisualizza.add(listaGiornate);
+		panVisualizza.add(singolaSquadra);
+		panVisualizza.add(listaSquadre);
+		add(panVisualizza, BorderLayout.WEST);
+		add(tabella, BorderLayout.SOUTH);
 
 		
 	}
@@ -191,6 +196,17 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			break;
 			
 		case "Classifica":
+			JFrame fc= new JFrame("Classifica");
+			fc.addWindowListener(new FrameAscoltatore(fc, framePrincipale));
+			fc.setResizable(false);
+			fc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			fc.add(new pannelloClassifica());
+			fc.pack();
+			fc.setVisible(true);
+			this.setEnabled(false);
+			
+			break;
 		case "Salva":
 		case "Carica":
 			
