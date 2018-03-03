@@ -1,9 +1,13 @@
-package gestoreSquadre;
+package Classifica;
 
 import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.JFrame;
+
+import gestoreSquadre.CalendarioSportivo;
+import gestoreSquadre.Squadra;
+import gestoreSquadre.SquadraClassifica;
 
 public class Classifica {
 	

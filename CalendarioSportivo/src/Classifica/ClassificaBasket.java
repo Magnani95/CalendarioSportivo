@@ -1,9 +1,13 @@
-package gestoreSquadre;
+package Classifica;
 
 import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import gestoreSquadre.CalendarioSportivo;
+import gestoreSquadre.Giornata;
+import gestoreSquadre.Incontro;
 
 public class ClassificaBasket extends Classifica {
 	
