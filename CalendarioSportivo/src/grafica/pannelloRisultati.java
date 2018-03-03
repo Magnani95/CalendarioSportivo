@@ -103,48 +103,48 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 		System.err.println("PannelloRisultati, evento:\t"+ e.getActionCommand());
 		
 		switch(e.getActionCommand()) {
-		
-		case "Salva":
-			Incontro attuale= recuperaIncontro();
 			
-			try {
-				spinnerCasa.commitEdit();
-				spinnerOspiti.commitEdit();
-			}catch(java.text.ParseException ex) {
+			case "Salva":
+				Incontro attuale= recuperaIncontro();
+				
+				try {
+					spinnerCasa.commitEdit();
+					spinnerOspiti.commitEdit();
+				}catch(java.text.ParseException ex) {
+					JOptionPane.showMessageDialog(framePrincipale,
+						    "Impossibile recuperare il valore impostato",
+						    "Errore",
+						    JOptionPane.ERROR_MESSAGE);
+					return;
+					}
+				attuale.setRisultato( (int) spinnerCasa.getValue(), (int) spinnerOspiti.getValue());
+				
 				JOptionPane.showMessageDialog(framePrincipale,
-					    "Impossibile recuperare il valore impostato",
-					    "Errore",
-					    JOptionPane.ERROR_MESSAGE);
-				return;
-				}
-			attuale.setRisultato( (int) spinnerCasa.getValue(), (int) spinnerOspiti.getValue());
+					    "Risultato aggiornato con successo",
+					    "Successo",
+					    JOptionPane.PLAIN_MESSAGE);
+				
+				break;
+			case "Modifica":
+				aggiornaValori();
+				
+				break;
+				
+			case "Non Giocata":
+				Incontro selezionato = recuperaIncontro();
+				selezionato.setNonGiocata();
+				
+				JOptionPane.showMessageDialog(framePrincipale,
+					    "Partita impostata come Non Giocata",
+					    "Successo",
+					    JOptionPane.PLAIN_MESSAGE);
+				
+				aggiornaValori();
+				
+				break;
+				
+			default: break;
 			
-			JOptionPane.showMessageDialog(framePrincipale,
-				    "Risultato aggiornato con successo",
-				    "Successo",
-				    JOptionPane.PLAIN_MESSAGE);
-			
-			break;
-		case "Modifica":
-			aggiornaValori();
-			
-			break;
-			
-		case "Non Giocata":
-			Incontro selezionato = recuperaIncontro();
-			selezionato.setNonGiocata();
-			
-			JOptionPane.showMessageDialog(framePrincipale,
-				    "Partita impostata come Non Giocata",
-				    "Successo",
-				    JOptionPane.PLAIN_MESSAGE);
-			
-			aggiornaValori();
-			
-			break;
-			
-		default: break;
-		
 		}
 		
 	}

@@ -8,6 +8,11 @@ import javax.swing.JPanel;
 public class pannelloClassifica extends JPanel implements ActionListener{
 
 	
+	public pannelloClassifica()
+	{
+		
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
