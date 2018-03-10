@@ -97,16 +97,24 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		panAzioni.add(genera);
 		panAzioni.add(classifica);
 		panAzioni.add(risultati);
-		add(panAzioni, BorderLayout.NORTH);
+		//add(panAzioni, BorderLayout.NORTH);
 		
 		panVisualizza.add(tutteGiornate);
 		panVisualizza.add(singolaGiornata);
 		panVisualizza.add(listaGiornate);
 		panVisualizza.add(singolaSquadra);
 		panVisualizza.add(listaSquadre);
-		add(panVisualizza, BorderLayout.WEST);
-		add(tabella, BorderLayout.SOUTH);
+		//add(panVisualizza, BorderLayout.WEST);
+		
+		JPanel panAlto = new JPanel();
+		panAlto.setLayout(new BorderLayout());
+		panAlto.add(panAzioni, BorderLayout.NORTH);
+		panAlto.add(panVisualizza, BorderLayout.SOUTH);
+		
+		add(panAlto, BorderLayout.NORTH);
+		add(tabella, BorderLayout.CENTER);
 
+		
 		
 	}
 
