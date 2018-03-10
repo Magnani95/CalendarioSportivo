@@ -8,6 +8,7 @@ import javax.swing.event.ChangeListener;
 
 import gestoreSquadre.CalendarioSportivo;
 import gestoreSquadre.Incontro;
+import gestoreSquadre.Risultato;
 
 public class pannelloRisultati extends JPanel implements ActionListener {
 	
@@ -46,12 +47,12 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 		squadraCasa = new JTextField(20);
 		squadraCasa.setEditable(false);
 		
-		spinnerCasa= new JSpinner(new SpinnerNumberModel(0, 0, 999, 1));
+		spinnerCasa= new JSpinner(new SpinnerNumberModel(0, -1, 999, 1));
 		
 		squadraOspite= new JTextField(20);
 		squadraOspite.setEditable(false);
 		
-		spinnerOspiti= new JSpinner(new SpinnerNumberModel(0, 0, 999, 1));
+		spinnerOspiti= new JSpinner(new SpinnerNumberModel(0, -1, 999, 1));
 
 		salva= new JButton("Salva");
 		salva.addActionListener(this);
@@ -118,12 +119,17 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 					return;
 					}
 				attuale.setRisultato( (int) spinnerCasa.getValue(), (int) spinnerOspiti.getValue());
-				
-				JOptionPane.showMessageDialog(framePrincipale,
+				if(attuale.getRisultato()==Risultato.nonGiocata) {
+					JOptionPane.showMessageDialog(framePrincipale,
+						    "Il punteggio non può essere -1.\nE' stata impostata come non giocata.",
+						    "Attenzione",
+						    JOptionPane.PLAIN_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(framePrincipale,
 					    "Risultato aggiornato con successo",
 					    "Successo",
 					    JOptionPane.PLAIN_MESSAGE);
-				
+				}
 				break;
 			case "Modifica":
 				aggiornaValori();

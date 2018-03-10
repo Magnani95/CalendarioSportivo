@@ -49,7 +49,7 @@ public class ClassificaCalcio extends Classifica {
 				}
 			}
 		}
-		
+		super.ordinaClassifica();
 		return true;
 	}
 	

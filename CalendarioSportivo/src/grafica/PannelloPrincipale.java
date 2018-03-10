@@ -90,21 +90,18 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		tabella.getColumnModel().getColumn(2).setPreferredWidth(120);
 		tabella.getColumnModel().getColumn(5).setPreferredWidth(120);
 		calendario.setModelloTabella(modelloTabella);
-		tabella.getSelectionModel().addListSelectionListener(modelloTabella);;
 		
 		//aggiunte al panel
 		
 		panAzioni.add(genera);
 		panAzioni.add(classifica);
 		panAzioni.add(risultati);
-		//add(panAzioni, BorderLayout.NORTH);
-		
+	
 		panVisualizza.add(tutteGiornate);
 		panVisualizza.add(singolaGiornata);
 		panVisualizza.add(listaGiornate);
 		panVisualizza.add(singolaSquadra);
 		panVisualizza.add(listaSquadre);
-		//add(panVisualizza, BorderLayout.WEST);
 		
 		JPanel panAlto = new JPanel();
 		panAlto.setLayout(new BorderLayout());
@@ -209,7 +206,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			fc.setResizable(false);
 			fc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
-			fc.add(new pannelloClassifica());
+			fc.add(new pannelloClassifica(calendario));
 			fc.pack();
 			fc.setVisible(true);
 			this.setEnabled(false);
@@ -222,6 +219,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		}
 		
+		System.err.println("Repaint FramePrincipale");
 		framePrincipale.repaint();
 		framePrincipale.pack();
 	}

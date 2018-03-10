@@ -1,5 +1,7 @@
 package Classifica;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -7,7 +9,6 @@ import javax.swing.JFrame;
 
 import gestoreSquadre.CalendarioSportivo;
 import gestoreSquadre.Squadra;
-import gestoreSquadre.SquadraClassifica;
 
 public class Classifica {
 	
@@ -31,6 +32,15 @@ public class Classifica {
 	{
 		System.err.println("!!Chiamata su Classifica!!!");
 		return false;
+	}
+	
+	public SquadraClassifica getPosizione(int pos)
+	{
+		return elencoSquadre.get(pos);
+	}
+	
+	protected void ordinaClassifica() {
+		Collections.sort(elencoSquadre);
 	}
 	
 	protected void assegnaPunti(Squadra sq, int punti)

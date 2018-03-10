@@ -58,7 +58,7 @@ public class ClassificaBasket extends Classifica {
 				}
 			}
 		}
-		
+		super.ordinaClassifica();
 		return true;
 	}
 	

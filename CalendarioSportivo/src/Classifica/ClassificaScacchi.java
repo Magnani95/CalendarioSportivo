@@ -49,7 +49,7 @@ public class ClassificaScacchi extends Classifica {
 				}
 			}
 		}
-		
+		super.ordinaClassifica();
 		return true;
 	}
 	

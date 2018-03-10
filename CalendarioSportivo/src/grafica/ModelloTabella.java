@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 
 
 
-public class ModelloTabella extends AbstractTableModel implements ListSelectionListener {
+public class ModelloTabella extends AbstractTableModel{
 	
 	private CalendarioSportivo calendario;
 	private int nSquadre;
@@ -233,12 +233,6 @@ public class ModelloTabella extends AbstractTableModel implements ListSelectionL
 	
 	public void reset() {
 		modalita="nessuna";
-	}
-
-
-	public void valueChanged(ListSelectionEvent e) {
-		
-		
 	}
 	
 	

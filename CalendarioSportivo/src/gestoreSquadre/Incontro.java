@@ -15,13 +15,20 @@ public class Incontro {
 	{
 		this.casa=casa;
 		this.ospite=ospite;
-		this.punteggioCasa=0;
-		this.punteggioOspite=0;
+		this.punteggioCasa=-1;
+		this.punteggioOspite=-1;
 		this.risultato=Risultato.nonGiocata;
 	}
 	
 	public void setRisultato(int puntiCasa, int puntiOspite)
 	{
+		if(puntiCasa <0 || puntiOspite<0) {
+			setNonGiocata();
+			puntiCasa=-1;
+			puntiOspite=-1;
+			return;
+		}
+		
 		this.punteggioCasa=puntiCasa;
 		this.punteggioOspite=puntiOspite;
 		updateRisultato(puntiCasa, puntiOspite);
@@ -40,8 +47,8 @@ public class Incontro {
 	public void setNonGiocata()
 	{
 		this.risultato= Risultato.nonGiocata;
-		this.punteggioCasa=0;
-		this.punteggioOspite=0;
+		this.punteggioCasa=-1;
+		this.punteggioOspite=-1;
 	}
 
 	public Squadra getCasa() {
