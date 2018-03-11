@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 import gestoreSquadre.CalendarioSportivo;
 
-public class pannelloClassifica extends JPanel implements ActionListener{
+public class PannelloClassifica extends JPanel implements ActionListener{
 
 	private CalendarioSportivo calendario;
 	
@@ -21,7 +21,7 @@ public class pannelloClassifica extends JPanel implements ActionListener{
 	private  ModelloTabellaClassifica modelloTabella;
 	private JTable tabella;
 	
-	public pannelloClassifica(CalendarioSportivo c)
+	public PannelloClassifica(CalendarioSportivo c)
 	{
 		
 	}

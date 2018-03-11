@@ -206,7 +206,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			fc.setResizable(false);
 			fc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
-			fc.add(new pannelloClassifica(calendario));
+			fc.add(new PannelloClassifica(calendario));
 			fc.pack();
 			fc.setVisible(true);
 			this.setEnabled(false);
