@@ -13,7 +13,7 @@ public class PannelloClassifica extends JPanel implements ActionListener{
 
 	private CalendarioSportivo calendario;
 	
-	private ButtonGroup pulsantiClassifica;
+	private ButtonGroup gruppoClassifica;
 	private JRadioButton calcio;
 	private JRadioButton basket;
 	private JRadioButton scacchi;
@@ -23,6 +23,24 @@ public class PannelloClassifica extends JPanel implements ActionListener{
 	
 	public PannelloClassifica(CalendarioSportivo c)
 	{
+		gruppoClassifica = new ButtonGroup();
+		
+		calcio = new JRadioButton("Calcio");
+		calcio.addActionListener(this);
+		
+		basket = new JRadioButton("Basket");
+		basket.addActionListener(this);
+		
+		scacchi = new JRadioButton("Scacchi");
+		scacchi.addActionListener(this);
+		
+		gruppoClassifica.add(calcio);
+		gruppoClassifica.add(bascket);
+		gruppoClassifica.add(scacchi);
+		
+		
+		//aggiunte al panel
+		
 		
 	}
 	
