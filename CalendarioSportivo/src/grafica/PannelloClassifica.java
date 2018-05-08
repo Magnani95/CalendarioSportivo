@@ -23,6 +23,8 @@ public class PannelloClassifica extends JPanel implements ActionListener{
 	
 	public PannelloClassifica(CalendarioSportivo c)
 	{
+		calendario=c;
+		
 		gruppoClassifica = new ButtonGroup();
 		
 		calcio = new JRadioButton("Calcio");
@@ -35,18 +37,36 @@ public class PannelloClassifica extends JPanel implements ActionListener{
 		scacchi.addActionListener(this);
 		
 		gruppoClassifica.add(calcio);
-		gruppoClassifica.add(bascket);
+		gruppoClassifica.add(basket);
 		gruppoClassifica.add(scacchi);
+		
+		modelloTabella= new ModelloTabellaClassifica(calendario);
+		tabella= new JTable(modelloTabella);
 		
 		
 		//aggiunte al panel
+		JPanel panRadioButton = new JPanel();
+		panRadioButton.add(calcio);
+		panRadioButton.add(basket);
+		panRadioButton.add(scacchi);
 		
+		add(panRadioButton);
 		
+		add(tabella);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+
+		System.err.println("Raccolto evento:\t"+e.getActionCommand());
+		switch(e.getActionCommand()) {
+		case "Calcio":
+			break;
+		case "Basket":
+			break;
+		case "Scacchi":
+			break;
+		default: return;
+		}
 	}
 
 }

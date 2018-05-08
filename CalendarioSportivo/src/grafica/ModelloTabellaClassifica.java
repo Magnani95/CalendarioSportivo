@@ -10,21 +10,24 @@ public class ModelloTabellaClassifica extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	private CalendarioSportivo calendario;
 	private Classifica classifica;
+	private boolean selezioneAttiva;
 	
 	private String[] nomeColonne = {"Posizione", "Squadra", "Punti"};
 	
-	public ModelloTabellaClassifica(CalendarioSportivo cld, Classifica cls)
+	public ModelloTabellaClassifica(CalendarioSportivo cld)
 	{
 		calendario=cld;
-		classifica=cls;
+		classifica=null;
+		selezioneAttiva=false;
 	}
 	public int getColumnCount() {
 		return 3;
 	}
 
 	public int getRowCount() {
-		return calendario.getSquadre().size();
+		return calendario.getSquadre().size() >0? calendario.getSquadre().size() : 1 ;
 	}
+	
 	public Object getValueAt(int riga, int colonna) 
 	{
 		if(riga==0) 
@@ -41,4 +44,11 @@ public class ModelloTabellaClassifica extends AbstractTableModel {
 		default : System.err.println("Errore ModelloTabellaClassifica-switch"); System.exit(-1); return -1;
 		}
 	}
+	public void setSelezioneAttiva(boolean sel) {
+		selezioneAttiva=sel;
+	}
+	public void setClassifica(Classifica cls) {
+		classifica=cls;
+	}
+	
 }

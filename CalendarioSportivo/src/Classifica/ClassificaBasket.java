@@ -19,7 +19,7 @@ public class ClassificaBasket extends Classifica {
 	public ClassificaBasket(CalendarioSportivo c, JFrame f)
 	{
 		super(c, f);
-		avviso= false;
+		avviso= false; 
 	}
 
 	public boolean calcolaClassifica() 
