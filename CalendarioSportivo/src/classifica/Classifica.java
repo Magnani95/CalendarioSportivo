@@ -40,7 +40,8 @@ public class Classifica {
 	}
 	
 	protected void ordinaClassifica() {
-		Collections.sort(elencoSquadre);
+		//Collections.sort(elencoSquadre);
+		Collections.sort(elencoSquadre, Collections.reverseOrder());
 	}
 	
 	protected void assegnaPunti(Squadra sq, int punti)

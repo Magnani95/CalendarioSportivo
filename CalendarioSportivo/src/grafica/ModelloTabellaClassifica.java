@@ -25,7 +25,12 @@ public class ModelloTabellaClassifica extends AbstractTableModel {
 	}
 
 	public int getRowCount() {
-		return calendario.getSquadre().size() >0? calendario.getSquadre().size() : 1 ;
+		
+		if(selezioneAttiva==false)
+			return 1;
+		
+		System.err.println("ClassificaTabella - row :\t"+calendario.getSquadre().size());
+		return calendario.getSquadre().size() >0? calendario.getSquadre().size()+1 : 1 ;
 	}
 	
 	public Object getValueAt(int riga, int colonna) 
@@ -37,9 +42,12 @@ public class ModelloTabellaClassifica extends AbstractTableModel {
 		case 0: return riga;
 		case 1: return classifica.getPosizione(riga-1).getSquadra().getNome();
 		case 2: 
-			if(classifica.getClass().getSimpleName() == "ClassificaScacchi")
-				return (double)classifica.getPosizione(riga-1).getPunti() /2;
-			else
+			
+			if(classifica.getClass().getSimpleName().equals("ClassificaScacchi")) {
+				double ris = ((double)classifica.getPosizione(riga-1).getPunti() )/2;
+				System.err.println("Caso scacchi. pnt\t"+ris);
+				return ris;
+			}else
 				return classifica.getPosizione(riga-1).getPunti();
 		default : System.err.println("Errore ModelloTabellaClassifica-switch"); System.exit(-1); return -1;
 		}

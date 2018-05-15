@@ -59,6 +59,7 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		pannello= new PannelloPrincipale(calendario, this);
 		add(pannello);
 		
+		setResizable(false);
 		pack();
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 

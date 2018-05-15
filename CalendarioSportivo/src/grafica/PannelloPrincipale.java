@@ -126,6 +126,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		case "singolaGiornata":
 		case "singolaSquadra":	
 			visioneTabella(e);
+			modelloTabella.fireTableDataChanged();
 			break;
 			
 		case "Genera Calendario":
@@ -206,9 +207,10 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			fc.setResizable(false);
 			fc.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
-			fc.add(new PannelloClassifica(calendario));
+			fc.add(new PannelloClassifica(calendario, fc));
 			fc.pack();
 			fc.setVisible(true);
+			fc.setResizable(true);
 			this.setEnabled(false);
 			
 			break;
