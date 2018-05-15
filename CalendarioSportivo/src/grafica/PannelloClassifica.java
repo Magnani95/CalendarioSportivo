@@ -13,6 +13,7 @@ import classifica.ClassificaCalcio;
 import classifica.ClassificaScacchi;
 import gestoreSquadre.CalendarioSportivo;
 
+//commento blablabla
 public class PannelloClassifica extends JPanel implements ActionListener{
 
 	private CalendarioSportivo calendario;
