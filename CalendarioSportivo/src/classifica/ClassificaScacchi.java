@@ -1,25 +1,23 @@
-package Classifica;
+package classifica;
 
 import java.util.Iterator;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import gestoreSquadre.CalendarioSportivo;
 import gestoreSquadre.Giornata;
 import gestoreSquadre.Incontro;
 
-public class ClassificaBasket extends Classifica {
+public class ClassificaScacchi extends Classifica {
 	
-	private static final int puntiVittoria = 2;
-	private static final int puntiPareggio = 0;
+	private static final int puntiVittoria = 2;		//punteggi duplicati per evitare di usare float
+	private static final int puntiPareggio = 1;
 	private static final int puntiSconfitta = 0;
-	private boolean avviso;
 	
-	public ClassificaBasket(CalendarioSportivo c, JFrame f)
+	
+	public ClassificaScacchi(CalendarioSportivo c, JFrame f)
 	{
 		super(c, f);
-		avviso= false; 
 	}
 
 	public boolean calcolaClassifica() 
@@ -41,13 +39,6 @@ public class ClassificaBasket extends Classifica {
 						super.assegnaPunti(attuale.getOspite(), puntiVittoria);
 						break;
 					case pareggio:
-						if(avviso==false) {
-							JOptionPane.showMessageDialog(frame,
-								    "E' stato trovato un pareggio, risultato impossibile nel Basket. Verra' contata come partita non giocata",
-								    "Attenzione",
-								    JOptionPane.INFORMATION_MESSAGE);
-							avviso=true;	
-						}
 						super.assegnaPunti(attuale.getCasa(), puntiPareggio);
 						super.assegnaPunti(attuale.getOspite(), puntiPareggio);
 						break;

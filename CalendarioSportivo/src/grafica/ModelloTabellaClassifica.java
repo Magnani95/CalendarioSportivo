@@ -2,7 +2,7 @@ package grafica;
 
 import javax.swing.table.AbstractTableModel;
 
-import Classifica.Classifica;
+import classifica.Classifica;
 import gestoreSquadre.CalendarioSportivo;
 
 public class ModelloTabellaClassifica extends AbstractTableModel {
