@@ -45,8 +45,10 @@ public class ModelloTabellaClassifica extends AbstractTableModel {
 			
 			if(classifica.getClass().getSimpleName().equals("ClassificaScacchi")) {
 				double ris = ((double)classifica.getPosizione(riga-1).getPunti() )/2;
-				System.err.println("Caso scacchi. pnt\t"+ris);
-				return ris;
+				if(ris<0)
+					return -1;
+				else
+					return ris;
 			}else
 				return classifica.getPosizione(riga-1).getPunti();
 		default : System.err.println("Errore ModelloTabellaClassifica-switch"); System.exit(-1); return -1;
