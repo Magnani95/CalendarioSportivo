@@ -1,9 +1,14 @@
 package gestoreSquadre;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Vector;
-public class Giornata {
+public class Giornata implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7915867314974987869L;
 	//--------Parametri
 	private Vector<Incontro> giornata;
 	

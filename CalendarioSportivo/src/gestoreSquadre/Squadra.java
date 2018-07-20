@@ -2,11 +2,16 @@ package gestoreSquadre;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 
-public class Squadra {
+public class Squadra implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2411061205671187889L;
 	//---------Parametri
 	private String 	nome;
 	private String 	citta;

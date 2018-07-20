@@ -213,12 +213,9 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			fc.setResizable(true);
 			this.setEnabled(false);
 			
-			break;
-		case "Salva":
-		case "Carica":
+			break;		
 			
-			break;
-		
+			default: System.err.println("Errore in PannelloPrincipale-switch"); System.exit(-1);
 		}
 		
 		System.err.println("Repaint FramePrincipale");

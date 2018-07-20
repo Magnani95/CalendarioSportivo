@@ -76,12 +76,40 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		f.setResizable(false);
 		f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		
+		IOputter io=new IOputter(calendario, "dati.dat");
 		
 		switch(e.getActionCommand()) {
-			case "Salva":
-		
 			case "Carica":
+				PannelloCarica p = new PannelloCarica();
+				io.setPanel(p);
+				f.add(p);
+				f.pack();
+				f.setVisible(true);
+				if(!io.carica())
+					JOptionPane.showMessageDialog(this,
+						    "Impossibile caricare i dati!",
+						    "Errore",
+						    JOptionPane.ERROR_MESSAGE);
+				else
+					JOptionPane.showMessageDialog(this,
+						    "Caricamento riuscito!",
+						    "Successo",
+						    JOptionPane.DEFAULT_OPTION);
+				f.dispose();
+				break;
+				
+			case "Salva":
+				if(!io.salva())
+					JOptionPane.showMessageDialog(this,
+						    "Impossibile salvare i dati!",
+						    "Errore",
+						    JOptionPane.ERROR_MESSAGE);
+				else
+					JOptionPane.showMessageDialog(this,
+						    "Salvataggio riuscito!",
+						    "Successo",
+						    JOptionPane.DEFAULT_OPTION);
+				break;
 				
 			case "Aggiungi":
 				f.add(new PannelloAggiungi(f, calendario, this));
@@ -89,6 +117,7 @@ public class FramePrincipale extends JFrame implements ActionListener{
 				f.setVisible(true);
 				this.setEnabled(false);
 				break;
+			
 			case "Modifica":
 				f.add(new PannelloModifica(f, calendario, this));
 				f.pack();

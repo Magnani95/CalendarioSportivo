@@ -3,6 +3,7 @@ package gestoreSquadre;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -11,7 +12,7 @@ import javax.swing.ImageIcon;
 
 import grafica.FramePrincipale;
 import grafica.ModelloTabella;
-public class CalendarioSportivo {
+public class CalendarioSportivo implements Serializable {
 
 	//---------Parametri
 	private Vector<Giornata> calendario;
@@ -141,6 +142,14 @@ public class CalendarioSportivo {
 		return nomiSquadre;
 	}
 	
+	public void setCarica(Vector<Squadra> sq, Vector<Giornata> g, int nSq) {
+		squadre=sq;
+		calendario=g;
+		nSquadreCalendario=nSq;
+		
+		if(calendario!=null)
+			modelloTabella.setCalendarioPronto(true);
+	}
 	public void eliminaCalendario()
 	{
 		calendario.clear();
@@ -153,6 +162,8 @@ public class CalendarioSportivo {
 	}
 	
 	public void aggiungiSquadra(Squadra nuova){
+		if(nuova.getLogo() == null)
+			nuova.setLogo(logoStandard);
 		squadre.add(nuova);
 	}
 

@@ -2,11 +2,13 @@ package grafica;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
 import gestoreSquadre.CalendarioSportivo;
+import gestoreSquadre.Giornata;
 import gestoreSquadre.Incontro;
 import gestoreSquadre.Risultato;
 
@@ -33,7 +35,7 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 	
 	private JButton salva;
 	private JButton nonGiocata;
-	
+	private JButton reset;
 	
 	public pannelloRisultati(JFrame f, CalendarioSportivo c, FramePrincipale fPrincipale)
 	{
@@ -41,7 +43,12 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 		this.frameContenitore=f;
 		this.calendario=c;
 		this.framePrincipale=framePrincipale;
-		
+		this.setLayout(new BorderLayout(5, 5) );
+		JPanel alto, centrale, basso;
+		alto= new JPanel();
+		centrale = new JPanel();
+		basso= new JPanel();
+	
 
 		// parte punteggio
 		squadraCasa = new JTextField(20);
@@ -59,6 +66,9 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 		
 		nonGiocata= new JButton("Non Giocata");
 		nonGiocata.addActionListener(this);
+		
+		reset = new JButton("Reset totale");
+		reset.addActionListener(this);
 		
 		//parte di selezione
 		//!!!DA LASCIARE PER ULTIMA ALTRIMENTI VA IN nullPointerException!!!
@@ -82,20 +92,25 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 		
 		
 		//aggiunte al panel
-		add(giornata);
-		add(listaGiornate);
+		alto.add(giornata);
+		alto.add(listaGiornate);
 		
-		add(incontro);
-		add(listaIncontri);
+		alto.add(incontro);
+		alto.add(listaIncontri);
 		
-		add(squadraCasa);
-		add(spinnerCasa);
+		centrale.add(squadraCasa);
+		centrale.add(spinnerCasa);
 		
-		add(squadraOspite);
-		add(spinnerOspiti);
+		centrale.add(squadraOspite);
+		centrale.add(spinnerOspiti);
 		
-		add(salva);
-		add(nonGiocata);
+		basso.add(salva);
+		basso.add(nonGiocata);
+		basso.add(reset);
+		
+		add(alto, BorderLayout.NORTH);
+		add(centrale, BorderLayout.CENTER);
+		add(basso, BorderLayout.SOUTH);
 	}
 	
 	
@@ -121,7 +136,7 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 				attuale.setRisultato( (int) spinnerCasa.getValue(), (int) spinnerOspiti.getValue());
 				if(attuale.getRisultato()==Risultato.nonGiocata) {
 					JOptionPane.showMessageDialog(framePrincipale,
-						    "Il punteggio non può essere -1.\nE' stata impostata come non giocata.",
+						    "Il punteggio non puï¿½ essere -1.\nE' stata impostata come non giocata.",
 						    "Attenzione",
 						    JOptionPane.PLAIN_MESSAGE);
 				}else {
@@ -148,7 +163,20 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 				aggiornaValori();
 				
 				break;
+			case "Reset totale":
+				Iterator<Giornata> itg = calendario.getCalendario().iterator();
+				while(itg.hasNext()) {
+					Iterator<Incontro> iti = itg.next().getIterator();
+					while(iti.hasNext()) 
+						iti.next().setNonGiocata();
+				}
+				aggiornaValori();
 				
+				JOptionPane.showMessageDialog(framePrincipale,
+					    "Reset completo dei risultati",
+					    "Successo",
+					    JOptionPane.PLAIN_MESSAGE);
+				break;
 			default: break;
 			
 		}

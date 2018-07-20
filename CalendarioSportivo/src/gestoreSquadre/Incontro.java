@@ -1,7 +1,13 @@
 package gestoreSquadre;
 
-public class Incontro {
+import java.io.Serializable;
 
+public class Incontro implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 537182288236741033L;
 	//------Parametri
 	private Squadra		casa;
 	private Squadra 	ospite;

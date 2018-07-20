@@ -34,28 +34,38 @@ public class PannelloAggiungi extends JPanel implements ActionListener{
 		this.fContenitore=f;
 		this.fPrincipale=framePrincipale;
 		this.path=null;
+		this.setLayout(new BorderLayout(5,5));
+		
+		JPanel alto, centrale, basso;
+		alto = new JPanel();
+		centrale = new JPanel();
+		basso = new JPanel();
 		
 		lNome= new JLabel("Nome Squadra");
-		add(lNome);
+		alto.add(lNome);
 		nome= new JTextField(15);
-		add(nome);
+		alto.add(nome);
 		
 		lCitta= new JLabel("Città");
-		add(lCitta);
+		alto.add(lCitta);
 		citta = new JTextField(15);
-		add(citta);
+		alto.add(citta);
 		
 		logo = new JButton("Scegli logo");
 		logo.addActionListener(this);
-		add(logo);
+		centrale.add(logo);
 		
 		pathLogo= new JTextField(35);
 		pathLogo.setEditable(false);
-		add(pathLogo);
+		centrale.add(pathLogo);
 		
 		conferma= new JButton("Conferma");
 		conferma.addActionListener(this);
-		add(conferma);
+		basso.add(conferma);
+		
+		add(alto, BorderLayout.NORTH);
+		add(centrale, BorderLayout.CENTER);
+		add(basso, BorderLayout.SOUTH);
 	}
 
 	@Override
