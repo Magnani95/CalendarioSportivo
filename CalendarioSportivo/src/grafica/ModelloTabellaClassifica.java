@@ -29,7 +29,7 @@ public class ModelloTabellaClassifica extends AbstractTableModel {
 		if(selezioneAttiva==false)
 			return 1;
 		
-		System.err.println("ClassificaTabella - row :\t"+calendario.getSquadre().size());
+		//System.err.println("ClassificaTabella - row :\t"+calendario.getSquadre().size());
 		return calendario.getSquadre().size() >0? calendario.getSquadre().size()+1 : 1 ;
 	}
 	

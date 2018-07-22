@@ -23,6 +23,7 @@ public class PannelloAggiungi extends JPanel implements ActionListener{
 	private String stCitta;
 	private JButton logo;
 	private String path;
+	private JLabel img;
 	
 	private JTextField pathLogo;
 	private JButton conferma;

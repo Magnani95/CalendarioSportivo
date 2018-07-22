@@ -110,10 +110,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		
 		add(panAlto, BorderLayout.NORTH);
 		add(tabella, BorderLayout.CENTER);
-
-		
-		
-	}
+}
 
 	
 	public void actionPerformed(ActionEvent e) 
@@ -275,6 +272,9 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		}
 	}
 	
+	public JTable getTabella() {
+		return this.tabella;
+	}
 }
 	
 	

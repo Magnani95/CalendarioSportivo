@@ -24,6 +24,7 @@ public class PannelloModifica extends JPanel implements ActionListener{
 	private JLabel lNome;
 	private JLabel lCitta;
 	private JLabel lLogo;
+	private JLabel img;
 	
 	private JTextField tNome;
 	private JTextField tCitta;
@@ -39,6 +40,12 @@ public class PannelloModifica extends JPanel implements ActionListener{
 		this.fContenitore=f;
 		this.fPrincipale=framePrincipale;
 		this.nomiSquadre= new Vector<String>();
+		setLayout(new BorderLayout(5, 5) );
+		
+		JPanel alto, centrale, basso;
+		alto= new JPanel();
+		centrale= new JPanel();
+		basso= new JPanel();
 		
 		nomiSquadre=calendario.getNomiSquadre();
 		selSquadra= new JLabel("Seleziona Squadra");
@@ -48,22 +55,29 @@ public class PannelloModifica extends JPanel implements ActionListener{
 		elimina = new JButton("Elimina");
 		
 		lNome = new JLabel("Nome:");
-		tNome = new JTextField(20);
+		tNome = new JTextField(15);
 		lCitta= new JLabel("Citta'");
-		tCitta= new JTextField(20);
+		tCitta= new JTextField(15);
+		
+		img= new JLabel(calendario.getLogo());
 		
 		listaSquadre.addActionListener(this);
 		modifica.addActionListener(this);
 		elimina.addActionListener(this);
 		
-		add(selSquadra);
-		add(listaSquadre);
-		add(lNome);
-		add(tNome);
-		add(lCitta);
-		add(tCitta);
-		add(modifica);
-		add(elimina);
+		alto.add(selSquadra);
+		alto.add(listaSquadre);
+		alto.add(lNome);
+		alto.add(tNome);
+		alto.add(lCitta);
+		alto.add(tCitta);
+		centrale.add(img);
+		basso.add(modifica);
+		basso.add(elimina);
+		
+		add(alto, BorderLayout.NORTH);
+		add(centrale, BorderLayout.CENTER);
+		add(basso, BorderLayout.SOUTH);
 	}
 	
 	public void actionPerformed(ActionEvent e)
@@ -78,6 +92,7 @@ public class PannelloModifica extends JPanel implements ActionListener{
 			
 			tNome.setText(s.getNome());
 			tCitta.setText(s.getCitta());
+			img.setIcon(s.getLogo());
 			break;
 		
 		case "modifica":
@@ -114,6 +129,8 @@ public class PannelloModifica extends JPanel implements ActionListener{
 		}
 		
 		nomiSquadre= calendario.getNomiSquadre();
+		this.repaint();
+		this.fContenitore.pack();
 	}
 	
 	

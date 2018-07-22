@@ -4,6 +4,7 @@ import java.util.Vector;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.PrinterException;
 
 import javax.swing.*;
 import gestoreSquadre.*;
@@ -19,6 +20,7 @@ public class FramePrincipale extends JFrame implements ActionListener{
 	private Menu file;
 	private MenuItem salva;
 	private MenuItem carica;
+	private MenuItem stampa;
 	
 	private Menu gestisciSquadre;
 	private MenuItem aggiungi;
@@ -32,26 +34,30 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		super(titolo);
 		this.calendario=calendario;
 		
-		MenuItem salva= new MenuItem("Salva");
+		salva= new MenuItem("Salva");
 		salva.addActionListener(this);
-		MenuItem carica= new MenuItem("Carica");
+		carica= new MenuItem("Carica");
 		carica.addActionListener(this);
-		Menu file= new Menu("File");
+		stampa= new MenuItem("Stampa");
+		stampa.addActionListener(this);
 		
-		MenuItem aggiungi= new MenuItem("Aggiungi");
+		file= new Menu("File");
+		
+		aggiungi= new MenuItem("Aggiungi");
 		aggiungi.addActionListener(this);
-		MenuItem modifica= new MenuItem("Modifica");
+		modifica= new MenuItem("Modifica");
 		modifica.addActionListener(this);
 	
-		Menu gestisciSquadre= new Menu("Gestisci Squadre");
+		gestisciSquadre= new Menu("Gestisci Squadre");
 		
 		file.add(salva);
 		file.add(carica);
+		file.add(stampa);
 		
 		gestisciSquadre.add(aggiungi);
 		gestisciSquadre.add(modifica);
 		
-		MenuBar barra= new MenuBar();
+		barra= new MenuBar();
 		barra.add(file);
 		barra.add(gestisciSquadre);
 		this.setMenuBar(barra);
@@ -109,6 +115,30 @@ public class FramePrincipale extends JFrame implements ActionListener{
 						    "Salvataggio riuscito!",
 						    "Successo",
 						    JOptionPane.DEFAULT_OPTION);
+				break;
+			
+			case "Stampa":
+				boolean stato=false;
+				try {
+					stato=pannello.getTabella().print();
+					
+					if(stato)
+						JOptionPane.showMessageDialog(this,
+							    "Stampa in corso!",
+							    "Successo",
+							    JOptionPane.DEFAULT_OPTION);
+					else
+						JOptionPane.showMessageDialog(this,
+							    "Impossibile stampare!",
+							    "Errore",
+							    JOptionPane.ERROR_MESSAGE);
+				}catch(PrinterException ep){
+					JOptionPane.showMessageDialog(this,
+						    "Impossibile stampare!",
+						    "Errore",
+						    JOptionPane.ERROR_MESSAGE);
+					System.err.println("Errore di stampa, eccezione\t"+ep.getMessage());
+					}
 				break;
 				
 			case "Aggiungi":
