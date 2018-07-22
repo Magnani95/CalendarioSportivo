@@ -12,24 +12,45 @@ import javax.swing.ImageIcon;
 
 import grafica.FramePrincipale;
 import grafica.ModelloTabella;
+
+/**
+ * Classe contenente il main del programma, nel quale vengono creati il frame principale
+ * i vettori contenenti le squadre e le giornate. E' il fulcro del programma che fa comunicare gli oggetti
+ * del programma e ne gestisce gli aspetti strutturali.
+ * 
+ * @author Andrea Magnani
+ * @version 1.0
+ * @see grafica.FramePrincipale
+ * @see Giornata
+ * @see Squadra
+ */
 public class CalendarioSportivo implements Serializable {
 
 	//---------Parametri
+	/**Vettore contenente le giornate del campionato*/
 	private Vector<Giornata> calendario;
+	/**Vettore contenente le squadre inserite*/
 	private Vector<Squadra> squadre;
+	/**Immagine contenente il logo standard */
 	private ImageIcon logoStandard;
-	
+	/**Intero rappresentante il numero di squadre presenti al momento della generazione
+	 * del calendario. Serve per fermare l'accesso a squadre aggunte dopo la generazione. */
 	private int nSquadreCalendario;
+	/**Modello tabella salvato per garantire una comunicazione diretta tra i due oggetti. */
 	private ModelloTabella modelloTabella;
 	
 	//---------Metodi
+	/**Main del programma che inizializza un CalendarioSportivo e il JFrame principale */
 	public static void main(String[] args) {
 		
 		CalendarioSportivo sessione = new CalendarioSportivo();
 		FramePrincipale f= new FramePrincipale("Calendario Sportivo", sessione);
 		f.setVisible(true);
 	}
-
+	
+	/**
+	 * Costruttore dell'oggetto. Vengono inizializzati gli attributi
+	 */
 	public CalendarioSportivo()
 	{
 		caricaLogo();
@@ -39,7 +60,11 @@ public class CalendarioSportivo implements Serializable {
 
 	}
 	
-	//Algoritmo di Berger
+	/**
+	 * Metodo che genera gli incontri secondo l'algoritmo di Berger. Viene generata andata e ritorno.
+	 * Se le squadre sono dispari, viene aggiunta la squadra "Dymmy club".
+	 * @see SquadraDummy
+	 * */
 	public boolean generaCalendario()
 	{
 		Squadra dummy;
@@ -92,7 +117,9 @@ public class CalendarioSportivo implements Serializable {
 	    modelloTabella.setCalendarioPronto(true);
 	    return true;
 	}
-	
+	/**
+	 * Metodo che genera il ritorno in modo speculare all'andata
+	 */
 	private void generaRitorno()
 	{
 		Incontro andata=null, ritorno=null;
@@ -114,7 +141,9 @@ public class CalendarioSportivo implements Serializable {
 			calendario.add(giornataRitorno);
 		}
 	}
-	
+	/**
+	 * Metodo che carica il logo standard all'interno dell'oggetto
+	 */
 	private void caricaLogo()
 	{
 		BufferedImage img=null; 
@@ -126,7 +155,10 @@ public class CalendarioSportivo implements Serializable {
 		}
 		this.logoStandard= new ImageIcon(img);
 	}
-	
+	/**
+	 * Getter per ottenere i nomi delle squadre.
+	 * @return un Vector di stringhe coi nomi delle squadre.
+	 */
 	public Vector<String> getNomiSquadre()
 	{
 		Vector<String> nomiSquadre= new Vector<String>();
@@ -141,7 +173,14 @@ public class CalendarioSportivo implements Serializable {
 			nomiSquadre.add( it.next().getNome() );
 		return nomiSquadre;
 	}
-	
+	/**
+	 * Metodo usato per il caricamento. Imposta le squadre, il calendario e il numero squadre 
+	 * dell'oggetto con quelle passate al metodo.
+	 * 
+	 * @param sq Vector di squadre da impostare
+	 * @param g Vector di giornate da impostare
+	 * @param nSq int di numeroSquadreCalendario da impostare
+	 */
 	public void setCarica(Vector<Squadra> sq, Vector<Giornata> g, int nSq) {
 		squadre=sq;
 		calendario=g;
@@ -150,34 +189,56 @@ public class CalendarioSportivo implements Serializable {
 		if(calendario!=null)
 			modelloTabella.setCalendarioPronto(true);
 	}
+	/**
+	 * Metodo per eliminare completamente il calendario. Imposta anche il modelloTabella su "Nonpronto"
+	 * per evitare un output grafico errato.
+	 */
 	public void eliminaCalendario()
 	{
 		calendario.clear();
 		nSquadreCalendario=0;
 		modelloTabella.setCalendarioPronto(false);
 	}
-	
+	/**Metodo per salvare il modelloTabella usato nella grafica nell'oggetto. */
 	public void setModelloTabella(ModelloTabella m) {
 		this.modelloTabella=m;
 	}
-	
+	/**
+	 * Metodo usato per aggiungere una squadra al Vector. Nel caso la squadra sia senza logo, viene 
+	 * impostato il logo standard
+	 * @param nuova squadra da aggiungere
+	 */
 	public void aggiungiSquadra(Squadra nuova){
 		if(nuova.getLogo() == null)
 			nuova.setLogo(logoStandard);
 		squadre.add(nuova);
 	}
-
+	/**
+	 * Getter per ottenere il calendario.
+	 * @return Vector di giornate
+	 */
 	public Vector<Giornata> getCalendario() {
 		return calendario;
 	}
-
+	/**
+	 * Getter per ottenere le squadre.
+	 * @return Vector di squadre
+	 */
 	public Vector<Squadra> getSquadre() {
 		return squadre;
 	}
-	
+	/**
+	 * Getter per ottenere il logo standard.
+	 * @return ImageIcon contenente il logo standard
+	 */
 	public ImageIcon getLogo(){
 		return logoStandard;
 	}
+	/**
+	 * Getteer per ottenere il numero di squadre al momento della generazione
+	 * del calendario.
+	 * @return int con nSquadreCalendario
+	 */
 	public int getNSquadreCalendario() {
 		return nSquadreCalendario;
 	}
