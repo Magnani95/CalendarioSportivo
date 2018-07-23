@@ -21,7 +21,7 @@ import javax.swing.JFrame;
 public class FrameAscoltatore extends WindowAdapter{
 	/** Frame di cui gestire la chiusura */
 	private JFrame frameContenitore;
-	/** Frame da riattivare in caso di chiusura del framePrincipale */
+	/** Frame da riattivare in caso di chiusura del frameContenitore */
 	private JFrame framePrincipale;
 	
 	/**

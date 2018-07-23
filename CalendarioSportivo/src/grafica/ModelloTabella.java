@@ -9,20 +9,33 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 
 
-
+/**
+ * Classe che estende <code>AbstractTableModel</code> e gestisce cosa deve essere mostrato
+ * nella JTable sul pannello principale. Implementa le varie viste permesse: totale, giornata, squadra.
+ * @author Andrea Magnani
+ * @see CalendarioSportivo
+ * @see PannelloPrincipale
+ */
 public class ModelloTabella extends AbstractTableModel{
-	
+	/**CalendarioSportivo dal quale recuperare i dati da mostrare */
 	private CalendarioSportivo calendario;
+	/**Numero di squadre che partecipano al calendario; evita la chiamata su calendario */
 	private int nSquadre;
+	/**Indica se il calendario è pronto o meno, per evitare accessi errati al calendario */
 	private boolean calendarioPronto;
-	
+	/**Indica in che modalità va fornito l'output grafico. I valori ammessi sono "nessuna", "tutto", "giornata" e "squadra" */
 	private String modalita;
+	/**Il nome della squadra da fornire in output per la vista "squadra"*/
 	private String squadraSelezionata;
+	/**Il numero della giornata da fornire in output per la vista "giornata" */
 	private int giornataSelezionata;
-	
+	/**Nome delle colonne da mostrare nella prima riga*/
 	private String[] nomeColonne = {"Giornata","Logo Casa","Casa","Punti Casa","Punti Ospiti","Ospiti", "Logo Ospiti" };
 	
-	
+	/**
+	 * Costruttore che inizializza l'oggetto in modalità "nessuna".
+	 * @param calendario CalendarioSportivo da cui recuperare i dati
+	 */
 	public ModelloTabella(CalendarioSportivo calendario)
 	{
 		this.calendario=calendario;
@@ -34,12 +47,16 @@ public class ModelloTabella extends AbstractTableModel{
 		giornataSelezionata=0;
 	}
 
-	
+	/**
+	 * Metodo che ritorna il numero di colonne da mostrare nella tabella.
+	 */
 	public int getColumnCount() {
 		return 7;
 	}
 
-	
+	/**
+	 * Metodo che calcola e ritorna quante righe sono da mostrare nella tabella.
+	 */
 	public int getRowCount()
 	{ 
 		//System.err.println("Check num righe:\t"+ String.valueOf(calendarioPronto));
@@ -69,12 +86,16 @@ public class ModelloTabella extends AbstractTableModel{
 		//System.err.println("nRighe:\t"+ String.valueOf(nRighe));
 		return nRighe;
 	}
-	
+	/**
+	 * Metodo che ritorna la classe dell'oggetto mostrato nella colonna.
+	 */
 	public Class getColumnClass(int colonna)
 	{
 		return getValueAt(0, colonna).getClass();
 	}
-
+	/**
+	 * Metodo che ritorna il valore/oggetto da mostrare alle coordinate passate.
+	 */
 	public Object getValueAt(int riga, int colonna) 
 	{
 		if(riga !=0 &&calendarioPronto== false)
@@ -96,7 +117,13 @@ public class ModelloTabella extends AbstractTableModel{
 		}
 		
 	}
-	
+	/**
+	 * Metodo interno che recupera i dati da ritornare alla tabella nel caso la modalità sia 
+	 * impostata su "Tutto", ovvero tutti gli incontri.
+	 * @param riga Coordinata riga 
+	 * @param colonna Coordinata colonna
+	 * @return l'oggetto da mostrare a quelle coordinate
+	 */
 	private Object casoTutto(int riga, int colonna)
 	{
 		//System.err.println("casoTutto:\t"+String.valueOf(riga)+"-"+String.valueOf(colonna));
@@ -131,7 +158,13 @@ public class ModelloTabella extends AbstractTableModel{
 		default: return "!!ERRORE 00 !!";
 		}
 	}
-	
+	/**
+	 * Metodo interno che recupera i dati da ritornare alla tabella nel caso la modalità sia 
+	 * impostato su "Giornata", ovvero solo i dati della giornata in giornataSelezionata.
+	 * @param riga Coordinata riga
+	 * @param colonna Coordinata colonna
+	 * @return valore da mostrare alle coordinate passate
+	 */
 	private Object casoGiornata(int riga, int colonna)
 	{
 		switch(colonna) {
@@ -153,7 +186,13 @@ public class ModelloTabella extends AbstractTableModel{
 		default: return "!!ERRORE 01 !! ";
 		}
 	}
-
+	/**
+	 * Metodo interno che recupera i dati da ritornare alla tabella nel caso la modalità sia 
+	 * impostato su "Squadra", ovvero solo i dati della squadra in squadraSelezionata.
+	 * @param riga Coordinata riga
+	 * @param colonna Coordinata colonna
+	 * @return valore da mostrare alle coordinate passate
+	 */
 	private Object casoSquadra(int riga, int colonna)
 	{
 		//System.err.println("casoSquadra\t"+riga+"-"+colonna);
@@ -181,7 +220,11 @@ public class ModelloTabella extends AbstractTableModel{
 		}
 		
 	}
-	
+	/**
+	 * Metodo che trova l'incontro della squadra in squadraSelezionata nella giornata passata.
+	 * @param nGiornata Numero della giornata cui si vuole ottenere l'incontro con la squadra in squadraSelezionata
+	 * @return Incontro della squadra in squadraSelezionata
+	 */
 	private Incontro trovaIncontro(int nGiornata)
 	{
 		Giornata gAttuale = calendario.getCalendario().get(nGiornata);
@@ -200,7 +243,10 @@ public class ModelloTabella extends AbstractTableModel{
 		return null;
 		
 	}
-	
+	/**
+	 * Setter per impostare calendarioPronto
+	 * @param b Booleano da impostare
+	 */
 	public void setCalendarioPronto(boolean b) {
 		calendarioPronto=b;
 	}
@@ -210,7 +256,10 @@ public class ModelloTabella extends AbstractTableModel{
 		squadraSelezionata=nuova;
 		modalita="squadra";
 	}
-	
+	/**
+	 * Metodo che aggiorna il valore in giornataSelezionata e imposta la modalita' su "giornata".
+	 * @param nGiornata Numero giornata che si vuole mostrare in output
+	 */
 	public void aggiornaGiornata(int nGiornata)
 	{
 		System.err.println("nGiornata\t"+nGiornata);
@@ -225,12 +274,16 @@ public class ModelloTabella extends AbstractTableModel{
 		giornataSelezionata=nGiornata;
 		modalita="giornata";
 	}
-	
+	/**
+	 * Metodo che imposta la modalita' su "tutto", ovvero mostrare tutti gli incontri
+	 */
 	public void aggiornaTutto()
 	{	
 		modalita="tutto";
 	}
-	
+	/**
+	 * Metodo che imposta la modalita' su "nessuna", ovvero mostrare solo i titoli delle colonne
+	 */
 	public void reset() {
 		modalita="nessuna";
 	}

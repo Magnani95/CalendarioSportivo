@@ -8,27 +8,49 @@ import java.awt.print.PrinterException;
 
 import javax.swing.*;
 import gestoreSquadre.*;
-
+/**
+ * Classe che gestice il <code>JFrame</code> principale del programma. Qui vengono rese accessibili
+ * le funzionalità di caricamento, salvataggio, stampa, aggiunta e modifica delle squadre.
+ * Inizializza al suo interno il PanelloPrincipale.
+ * @author Andrea Magnani
+ * @see PannelloPrincipale
+ * @see PannelloAggiungi
+ * @see PannelloModifica
+ * @see PannelloCarica
+ * @see IOputter
+ */
 public class FramePrincipale extends JFrame implements ActionListener{
 	
 	//----------Parametri
-	private static final long serialVersionUID = 1L;
+	
+	/**CalendarioSportivo associato */
 	private CalendarioSportivo calendario;
-	
+	/**Barra del menu del frame */
 	private MenuBar barra;
-	
+	/**Bottone del menu che include IO e stampa */
 	private Menu file;
+	/**Elemento di file per lanciare l'operazione di salvataggio*/
 	private MenuItem salva;
+	/**Elemento di file per lanciare l'operazione di caricamento*/
 	private MenuItem carica;
+	/**Elemento di file per lanciare l'operazione di stampa*/
 	private MenuItem stampa;
 	
+	/**Bottone del menu che include l'aggiunta e modifica delle squadre */
 	private Menu gestisciSquadre;
+	/**Elemento di file per lanciare l'operazione di aggiunta squadra*/
 	private MenuItem aggiungi;
+	/**Elemento di file per lanciare l'operazione di modifica squadra*/
 	private MenuItem modifica;
-	
+	/**Pannello che include la principale parte grafica del programma */
 	private PannelloPrincipale pannello;
 	
 	//---------Metodi
+	/**
+	 * Costruttore della classe in cui vengono inizializzate tutte le componenti
+	 * @param titolo Testo da mostrare nella barra del titolo della finestra
+	 * @param calendario CalendarioSportivo associato al frame
+	 */
 	public FramePrincipale(String titolo, CalendarioSportivo calendario)
 	{
 		super(titolo);
@@ -72,7 +94,9 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		
 	}
 
-	
+	/**
+	 * Metodo per la raccolta e la gestione degli eventi sul frame.
+	 */
 	public void actionPerformed(ActionEvent e) 
 	{
 		System.err.println(e.getActionCommand());

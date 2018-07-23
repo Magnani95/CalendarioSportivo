@@ -12,7 +12,7 @@ import gestoreSquadre.Giornata;
 import gestoreSquadre.Incontro;
 import gestoreSquadre.Risultato;
 
-public class pannelloRisultati extends JPanel implements ActionListener {
+public class PannelloRisultati extends JPanel implements ActionListener {
 	
 	private JFrame frameContenitore;
 	private CalendarioSportivo calendario;
@@ -37,7 +37,7 @@ public class pannelloRisultati extends JPanel implements ActionListener {
 	private JButton nonGiocata;
 	private JButton reset;
 	
-	public pannelloRisultati(JFrame f, CalendarioSportivo c, FramePrincipale fPrincipale)
+	public PannelloRisultati(JFrame f, CalendarioSportivo c, FramePrincipale fPrincipale)
 	{
 		super();
 		this.frameContenitore=f;

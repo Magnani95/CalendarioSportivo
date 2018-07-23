@@ -13,21 +13,40 @@ import classifica.ClassificaCalcio;
 import classifica.ClassificaScacchi;
 import gestoreSquadre.CalendarioSportivo;
 
-//commento blablabla
+/**
+ * Classe che implementa il pannello per mostrare e scegliere il tipo di classifica.
+ * @author Andrea Magnani
+ * @see Classifica
+ * @see ModelloTabellaClassifica
+ */
 public class PannelloClassifica extends JPanel implements ActionListener{
 
+	/**CalendarioSportivo associato al pannello */
 	private CalendarioSportivo calendario;
+	/**Classifica da mostrare in output */
 	private Classifica classifica;
+	/**Frame contenitore del pannello */
 	private JFrame frame;
 	
+	/**Button group per gestire la terna di JRadioButton */
 	private ButtonGroup gruppoClassifica;
+	/**Bottone per scegliere la classifica calcio */
 	private JRadioButton calcio;
+	/**Bottone per scegliere la classifica basket */
 	private JRadioButton basket;
+	/**Bottone per scegliere la classifica scacchi */
 	private JRadioButton scacchi;
 	
+	/**Modello della tabella per gestire l'output grafico */
 	private  ModelloTabellaClassifica modelloTabella;
+	/**Tabella per mostrare la classifica*/
 	private JTable tabella;
 	
+	/**
+	 * Costruttore della classe che inizializza le componenti
+	 * @param c CalendarioSportivo associato
+	 * @param j JFrame contenitore del pannello
+	 */
 	public PannelloClassifica(CalendarioSportivo c, JFrame j)
 	{
 		//creazione dell'entita'
@@ -65,7 +84,9 @@ public class PannelloClassifica extends JPanel implements ActionListener{
 		
 		add(tabella);
 	}
-	
+	/**
+	 * Metodo per l'ascolto e la gestione degli eventi associati al pannello
+	 */
 	public void actionPerformed(ActionEvent e) {
 
 		System.err.println("Raccolto evento:\t"+e.getActionCommand());

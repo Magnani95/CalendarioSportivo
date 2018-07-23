@@ -11,28 +11,52 @@ import javax.swing.*;
 import gestoreSquadre.CalendarioSportivo;
 import gestoreSquadre.Squadra;
 
+/**
+ * Pannello che implementa le funzionalità di modifica o eliminazione di una squadra dal calendario.
+ * Nel caso di eliminazione, viene chiesto se proseguire, poichè verrà cancellato anche il calendario.
+ * @author Andrea Magnani
+ * @see CalendarioSportivo
+ * @see FramePrincipale
+ */
 public class PannelloModifica extends JPanel implements ActionListener{
 
+	/**CalendarioSportivo associato*/
 	private CalendarioSportivo calendario;
+	/**Frame contenente il pannello */
 	private JFrame fContenitore;
+	/**Pannello principale del programma */
 	private JFrame fPrincipale;
+	/**Vector contenente le stringhe coi nomi delle squadre */
 	private Vector<String> nomiSquadre;
 	
+	/**Label che mostra "seleziona Squadra" */
 	private JLabel selSquadra;
+	/**Elenco per selezionare tramite i nomi delle squadre */
 	private JComboBox listaSquadre;
 	
+	/**Label che mostra "Nome" */
 	private JLabel lNome;
+	/**Label che mostra "Citta'" */
 	private JLabel lCitta;
-	private JLabel lLogo;
+	/**Label che mostra il logo della squadra */
 	private JLabel img;
 	
+	/**Campo di testo per il nome della squadra */
 	private JTextField tNome;
+	/**Campo id testo per la città della squadra */
 	private JTextField tCitta;
-	private ImageIcon logo;
 	
+	/**Bottone per salvare le modifiche*/
 	private JButton modifica;
+	/**Bottone per eliminare la squadra */
 	private JButton elimina;
 	
+	/**
+	 * Costruttore della classe che inizializza le componenti
+	 * @param f Frame contenente il pannello
+	 * @param c Calendario cui modificare le squadre
+	 * @param framePrincipale FramePrincipale del programma
+	 */
 	public PannelloModifica(JFrame f, CalendarioSportivo c, FramePrincipale framePrincipale)
 	{
 		super();
@@ -79,7 +103,9 @@ public class PannelloModifica extends JPanel implements ActionListener{
 		add(centrale, BorderLayout.CENTER);
 		add(basso, BorderLayout.SOUTH);
 	}
-	
+	/**
+	 * Metodo per l'ascolto e la gestione degli eventi associati al panel
+	 */
 	public void actionPerformed(ActionEvent e)
 	{
 		System.err.println("Evento\t"+ e.getActionCommand());

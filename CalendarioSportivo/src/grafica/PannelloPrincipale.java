@@ -6,30 +6,60 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.*;
-import gestoreSquadre.*;
 
+import classifica.Classifica;
+import gestoreSquadre.*;
+/**
+ * Pannello incluso nel PannelloPrincipale che permette tramite bottoni le operazioni di generazione del calendario, la visione
+ * della classifica e l'inserimento dei risultati. Include anche una tabella con gli incontri e i bottoni per scegliere la vista
+ * desiderata.
+ * @author Andrea Magnani
+ * @see PannelloPrincipale
+ * @see PannelloClassifica
+ * @see CalendarioSportivo
+ * @see ModelloTabella
+ * @see PannelloRisultati
+ */
 public class PannelloPrincipale extends JPanel implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
+	/**CalendarioSportivo associato*/
 	private CalendarioSportivo calendario;
+	/**Frame principale e contenitore del pannello*/
 	private FramePrincipale framePrincipale;
+	/**Vector coi nomi delle squadre per le JComboBox di selezione della vista tabella*/
 	private Vector<String> nomiSquadre;
 	
+	/**Bottone per generare gli incontri */
 	private JButton genera;
+	/**Bottone per mostrare la classifica */
 	private JButton classifica;
+	/**Bottone per impostare i risultati */
 	private JButton risultati;
 	
+	/**Gruppo di bottoni per gestire le viste tabella */
 	private ButtonGroup gruppoVisualizza;
+	/**Bottone per vedere tutti gli incontri */
 	private JRadioButton tutteGiornate;
+	/**Bottone per vedere solo una singola giornata nella tabella*/
 	private JRadioButton singolaGiornata;
+	/**Bottone per vedere una singola squadra nella tabella*/
 	private JRadioButton singolaSquadra;
 	
+	/**Lista delle squadre per la vista tabella*/
 	private JComboBox listaSquadre;
+	/**Lista delle giornate per la vista tabella*/
 	private JComboBox listaGiornate;
 	
+	/**Modello tabella associato alla JTable */
 	private ModelloTabella modelloTabella;
+	/**JTable usata per mostrare gli incontri */
 	private JTable tabella;
 	
+	/**
+	 * Costruttore della classe che inizializza le componenti.
+	 * @param calendario Calendario associato
+	 * @param framePrincipale Frame che contiene il pannello
+	 */
 	public PannelloPrincipale(CalendarioSportivo calendario, FramePrincipale framePrincipale)
 	{
 		super();
@@ -112,7 +142,9 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		add(tabella, BorderLayout.CENTER);
 }
 
-	
+	/**
+	 * Metodo per ascoltare e gestire gli eventi associati al panel
+	 */
 	public void actionPerformed(ActionEvent e) 
 	{
 		
@@ -191,7 +223,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			f.setResizable(false);
 			f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			
-			f.add(new pannelloRisultati(f, calendario, framePrincipale));
+			f.add(new PannelloRisultati(f, calendario, framePrincipale));
 			f.pack();
 			f.setVisible(true);
 			this.setEnabled(false);
@@ -220,6 +252,10 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		framePrincipale.pack();
 	}
 	
+	/**
+	 * Metodo per gestire a parte gli eventi riguardanti la vista della tabella
+	 * @param e ActionEvent da gestire
+	 */
 	private void visioneTabella(ActionEvent e)
 	{
 		System.err.println("Inizio visioneTabella");
@@ -271,7 +307,10 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		default: System.err.println("Errore in VisioneTabella");
 		}
 	}
-	
+	/**
+	 * Getter per ottenere la tabella contenuta nel panel
+	 * @return JTable del panel
+	 */
 	public JTable getTabella() {
 		return this.tabella;
 	}
