@@ -94,7 +94,7 @@ public class PannelloClassifica extends JPanel implements ActionListener{
 		
 		case "Calcio":
 			modelloTabella.setSelezioneAttiva(true);
-			classifica = new ClassificaCalcio(calendario, frame);
+			classifica = new ClassificaCalcio(calendario);
 			break;
 			
 		case "Basket":
@@ -104,7 +104,7 @@ public class PannelloClassifica extends JPanel implements ActionListener{
 			
 		case "Scacchi":
 			modelloTabella.setSelezioneAttiva(true);
-			classifica = new ClassificaScacchi(calendario, frame);
+			classifica = new ClassificaScacchi(calendario);
 			break;
 		default: return;
 		}
