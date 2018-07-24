@@ -47,6 +47,7 @@ public class Classifica {
 	}
 	/**
 	 * Metodo che aggiona la classifica andando a recuperare le squadre e a controllare i risultati dal calendario.
+	 * Al termine la classifica viene ordinata. Se la chiamata è su un'istanza di Classifica, non viene fatto nulla.
 	 * @return Ritorna true se la chiamata è fatta su una sottoclasse, false se la chiamata è fatta su un'istanza di Classifica
 	 */
 	public boolean calcolaClassifica()

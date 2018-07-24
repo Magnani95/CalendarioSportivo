@@ -1,22 +1,39 @@
 package classifica;
 
 import gestoreSquadre.Squadra;
-
+/**
+ * Classe implementa una squadra all'interno di una classifica, ovvero ne riporta i punti ottenuti
+ * @author Andrea Magnani
+ * @see Squadra
+ * @see Classifica
+ */
 public class SquadraClassifica implements Comparable<SquadraClassifica>{
 
+	/**Squadra*/
 	private Squadra squadra;
+	/**Punti guadagnati dalla squadra*/
 	private int punti;
 	
+	/**
+	 *Costruttore che inizializza l'oggetto associandolo alla squadra passata.
+	 * @param sq Squadra da associare all'oggetto
+	 */
 	public SquadraClassifica(Squadra sq)
 	{
 		squadra = sq;
 		punti = -1;
 	}
-	
+	/**
+	 * Getter per ottenere i punti della squadra
+	 * @return i punti ottenuti
+	 */
 	public int getPunti() {
 		return punti;
 	}
-	
+	/**
+	 * Metodo per aggiungere punti alla squadra. Un punteggio negativo, comporta l'interruzione del programma.
+	 * @param p Punti da aggiungere
+	 */
 	public void aggiungiPunti(int p) {
 		
 		if(p < 0) {
@@ -28,6 +45,9 @@ public class SquadraClassifica implements Comparable<SquadraClassifica>{
 		
 		punti+=p;
 	}
+	/**
+	 * Metodo usato per consentire l'ordinamento del vector
+	 */
 	public int compareTo(SquadraClassifica altra)
 	{
 		if(this.punti < altra.getPunti())
@@ -46,7 +66,10 @@ public class SquadraClassifica implements Comparable<SquadraClassifica>{
 			}
 		}
 	}
-	
+	/**
+	 * Getter per ottenere la squadra dell'oggetto.
+	 * @return La Squadra dell'oggetto
+	 */
 	public Squadra getSquadra() {
 		return squadra;
 	}
