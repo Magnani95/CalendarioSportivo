@@ -51,6 +51,7 @@ public class ModelloTabellaClassifica extends AbstractTableModel {
 	}
 	/**
 	 * Metodo che ritorna l'oggetto/valore da mostrare alle coordinate passate.
+	 * I dati di una classificaScacchi vengono dimezzati.
 	 */
 	public Object getValueAt(int riga, int colonna) 
 	{

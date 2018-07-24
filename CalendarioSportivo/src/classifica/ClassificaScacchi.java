@@ -8,16 +8,28 @@ import gestoreSquadre.CalendarioSportivo;
 import gestoreSquadre.Giornata;
 import gestoreSquadre.Incontro;
 
+/**
+ * Classe che estende la classe Classifica e implementa una classifica di scacchi. i punteggi vengono calcolati
+ * raddoppiati per continuare ad usare valori int; dovranno poi essere dimezzati al momento d
+ * @author Andrea Magnani
+ * @see Classifica
+ */
 public class ClassificaScacchi extends Classifica {
 	
+	/**Punti raddoppiati guadagnati da una vittoria  */
 	private static final int puntiVittoria = 2;		//punteggi duplicati per evitare di usare float
+	/**Punti raddoppiati guadagnati da un pareggio  */
 	private static final int puntiPareggio = 1;
+	/**Punti raddoppiati guadagnati da una sconfitta  */
 	private static final int puntiSconfitta = 0;
 	
-	
-	public ClassificaScacchi(CalendarioSportivo c, JFrame f)
+	/**
+	 * Costurttore della classe
+	 * @param c Calendario dal quale recuperare squadre e incontri
+	 */
+	public ClassificaScacchi(CalendarioSportivo c)
 	{
-		super(c, f);
+		super(c);
 	}
 
 	public boolean calcolaClassifica() 

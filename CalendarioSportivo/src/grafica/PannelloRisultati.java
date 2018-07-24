@@ -11,32 +11,54 @@ import gestoreSquadre.CalendarioSportivo;
 import gestoreSquadre.Giornata;
 import gestoreSquadre.Incontro;
 import gestoreSquadre.Risultato;
-
+/**
+ * Classe che implementa un pannello per modificare i risultati.
+ * @author Andrea Magnani
+ * @see PannelloPrincipale
+ * @see Incontro
+ */
 public class PannelloRisultati extends JPanel implements ActionListener {
 	
+	/**JFrame che contiene il pannello */
 	private JFrame frameContenitore;
+	/**Calendario associato al frame*/
 	private CalendarioSportivo calendario;
+	/**Frame principale del programma */
 	private FramePrincipale framePrincipale;
 	
+	/**Label mostrante "Numero Giornata"*/
 	private JLabel giornata;
+	/** JComboBox con la lista delle giornate*/
 	private JComboBox listaGiornate;
 	
+	/**Label mostrante "Numero Incontro" */
 	private JLabel incontro;
+	/**JComboBox con la lista degli incontri */
 	private JComboBox listaIncontri;
 	
+	/**Label che mostra il nome della squadra in casa */
 	private JTextField squadraCasa;
+	/**Label che mostra il nome della squadra ospite */
 	private JTextField squadraOspite;
 	
-	private JLabel punteggioCasa;
+	/**Spinner per impostare il punteggio della squadra in casa */
 	private JSpinner spinnerCasa;
-	
-	private JLabel punteggioOspiti;
+	/**Spinner per impostare il punteggio della squadra ospite */
 	private JSpinner spinnerOspiti;
 	
+	/**Bottone per salvare il risultato impostato*/
 	private JButton salva;
+	/**Bottone per impostare la partita come "NonGiocata"*/
 	private JButton nonGiocata;
+	/**Bottone per resettare tutti i risultati del calendario */
 	private JButton reset;
 	
+	/**
+	 * Costutruttore della classe che inizializza le componenti
+	 * @param f FrameContenitore del panel
+	 * @param c CalendarioSportivo dal quale recuperare i dati
+	 * @param fPrincipale FramePrincipale del programma
+	 */
 	public PannelloRisultati(JFrame f, CalendarioSportivo c, FramePrincipale fPrincipale)
 	{
 		super();
@@ -113,7 +135,9 @@ public class PannelloRisultati extends JPanel implements ActionListener {
 		add(basso, BorderLayout.SOUTH);
 	}
 	
-	
+	/**
+	 * Metodo che raccoglie e gestisce gli eventi
+	 */
 	public void actionPerformed(ActionEvent e)
 	{
 		System.err.println("PannelloRisultati, evento:\t"+ e.getActionCommand());
@@ -182,7 +206,9 @@ public class PannelloRisultati extends JPanel implements ActionListener {
 		}
 		
 	}
-	
+	/**
+	 * Aggiorna i valori mostrati nelle label e negli spinner in base alla giornata e all'incontro selezionato
+	 */
 	private void aggiornaValori()
 	{
 		Incontro selezionato= recuperaIncontro();
@@ -194,6 +220,10 @@ public class PannelloRisultati extends JPanel implements ActionListener {
 		
 		
 	}
+	/**
+	 * Recupera l'incontro corrispondente ai valori mostrati dai due JComboBox
+	 * @return Incontro corrispondente ai valori selezionati
+	 */
 	private Incontro recuperaIncontro()
 	{
 		int nGiornata= listaGiornate.getSelectedIndex();
