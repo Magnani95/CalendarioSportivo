@@ -155,6 +155,8 @@ public class PannelloModifica extends JPanel implements ActionListener{
 		}
 		
 		nomiSquadre= calendario.getNomiSquadre();
+		DefaultComboBoxModel model = new DefaultComboBoxModel( nomiSquadre );
+		listaSquadre.setModel(model);
 		this.repaint();
 		this.fContenitore.pack();
 	}

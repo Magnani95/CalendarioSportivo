@@ -54,7 +54,8 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 	private ModelloTabella modelloTabella;
 	/**JTable usata per mostrare gli incontri */
 	private JTable tabella;
-	
+	/**Pannello con scrollbar usata per gestire la tabella */
+	private JScrollPane jsp;
 	/**
 	 * Costruttore della classe che inizializza le componenti.
 	 * @param calendario Calendario associato
@@ -139,7 +140,15 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 		panAlto.add(panVisualizza, BorderLayout.SOUTH);
 		
 		add(panAlto, BorderLayout.NORTH);
-		add(tabella, BorderLayout.CENTER);
+		
+		tabella.setTableHeader(null);
+		jsp= new JScrollPane(tabella);
+		jsp.setHorizontalScrollBarPolicy(jsp.HORIZONTAL_SCROLLBAR_NEVER);
+		add(jsp, BorderLayout.SOUTH);
+		
+		 
+	
+		//add(tabella, BorderLayout.CENTER);
 }
 
 	/**
@@ -226,7 +235,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			f.add(new PannelloRisultati(f, calendario, framePrincipale));
 			f.pack();
 			f.setVisible(true);
-			this.setEnabled(false);
+			framePrincipale.setEnabled(false);
 			
 			break;
 			
@@ -240,7 +249,7 @@ public class PannelloPrincipale extends JPanel implements ActionListener {
 			fc.pack();
 			fc.setVisible(true);
 			fc.setResizable(true);
-			this.setEnabled(false);
+			framePrincipale.setEnabled(false);
 			
 			break;		
 			

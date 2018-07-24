@@ -4,6 +4,8 @@ import java.util.Vector;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.print.PrinterException;
 
 import javax.swing.*;
@@ -19,7 +21,7 @@ import gestoreSquadre.*;
  * @see PannelloCarica
  * @see IOputter
  */
-public class FramePrincipale extends JFrame implements ActionListener{
+public class FramePrincipale extends JFrame implements ActionListener {
 	
 	//----------Parametri
 	
@@ -87,13 +89,22 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		pannello= new PannelloPrincipale(calendario, this);
 		add(pannello);
 		
+		//---------------
+		/*pannello= new PannelloPrincipale(calendario, this);
+		JScrollPane jsp= new JScrollPane(pannello);
+		jsp.setHorizontalScrollBarPolicy(jsp.HORIZONTAL_SCROLLBAR_NEVER);
+		add(jsp);*/
+		//-----------------
+		
 		setResizable(false);
+		
 		pack();
+		setSize(this.getSize().width+20, this.getSize().height);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		
 	}
-
+	
 	/**
 	 * Metodo per la raccolta e la gestione degli eventi sul frame.
 	 */
@@ -183,5 +194,4 @@ public class FramePrincipale extends JFrame implements ActionListener{
 		}
 		
 	}
-	
 }
